@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2018 Rhodes Ridge - Dashboard báo cáo</title>
+<style>
+  :root{
+    --bg:#0f1420; --card:#171d2b; --card-hover:#1e263a; --border:#2a3345;
+    --text:#e8ecf4; --text-dim:#9aa5b8; --accent:#4f8cff; --accent-soft:#1c2b4d;
+    --green:#3ecf8e; --amber:#e8b339; --red:#ef5b6e;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(180deg,var(--bg),#0a0e17); color:var(--text); min-height:100vh;
+  }
+  header{padding:36px 24px 20px; text-align:center;}
+  header h1{margin:0 0 6px; font-size:26px; font-weight:700;}
+  header p{margin:0; color:var(--text-dim); font-size:14px;}
+  header .updated{margin-top:10px; font-size:12px; color:var(--text-dim);}
+  main{max-width:960px; margin:0 auto; padding:8px 20px 60px;}
+  .group{margin-top:28px;}
+  .group h2{
+    font-size:15px; letter-spacing:.04em; text-transform:uppercase; color:var(--text-dim);
+    border-bottom:1px solid var(--border); padding-bottom:8px; margin-bottom:14px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .group h2 .dot{width:8px; height:8px; border-radius:50%; background:var(--accent);}
+  .cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px;}
+  a.card{
+    display:block; background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:16px 18px; text-decoration:none; color:var(--text); transition:all .15s ease;
+    position:relative; overflow:hidden;
+  }
+  a.card:hover{background:var(--card-hover); border-color:var(--accent); transform:translateY(-2px);}
+  a.card .title{font-size:15px; font-weight:600; margin-bottom:6px;}
+  a.card .meta{font-size:12.5px; color:var(--text-dim);}
+  a.card .badge{
+    position:absolute; top:12px; right:12px; font-size:10.5px; font-weight:700;
+    padding:3px 8px; border-radius:20px; letter-spacing:.03em;
+  }
+  .badge.styled{background:rgba(62,207,142,.15); color:var(--green);}
+  .badge.plain{background:rgba(154,165,184,.15); color:var(--text-dim);}
+  footer{text-align:center; color:var(--text-dim); font-size:12.5px; padding:20px; border-top:1px solid var(--border);}
+  footer code{background:var(--accent-soft); padding:2px 6px; border-radius:6px; color:#aecbff;}
+</style>
+</head>
+<body>
+<header>
+  <h1>2018 Rhodes Ridge - Dashboard báo cáo</h1>
+  <p>Bấm vào tên báo cáo để mở bản mới nhất - mỗi link luôn trỏ tới bản cập nhật gần nhất, không cần tìm link mới mỗi ngày.</p>
+  <div class="updated">PDF theo ngày lưu ở Google Drive / PM. Trang này chỉ giữ 1 bản HTML mới nhất cho mỗi báo cáo.</div>
+</header>
+<main>
+
+  <div class="group">
+    <h2><span class="dot"></span>Crushing &amp; Screening - tiến độ (9:00 hằng ngày)</h2>
+    <div class="cards">
+      <a class="card" href="module-status.html">
+        <span class="badge styled">GIAO DIỆN MỚI</span>
+        <div class="title">Module Status Report</div>
+        <div class="meta">Cập nhật mỗi sáng T2-T6</div>
+      </a>
+      <a class="card" href="3d-model.html">
+        <span class="badge styled">GIAO DIỆN MỚI</span>
+        <div class="title">3D Model Stage Report</div>
+        <div class="meta">Cập nhật mỗi sáng T2-T6</div>
+      </a>
+      <a class="card" href="mech-fab.html">
+        <span class="badge styled">GIAO DIỆN MỚI</span>
+        <div class="title">2D Drawings - Mech &amp; Fab</div>
+        <div class="meta">Cập nhật mỗi sáng T2-T6</div>
+      </a>
+      <a class="card" href="concrete-piping.html">
+        <span class="badge styled">GIAO DIỆN MỚI</span>
+        <div class="title">2D Drawings - Concrete &amp; Piping</div>
+        <div class="meta">Cập nhật mỗi sáng T2-T6</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="group">
+    <h2><span class="dot"></span>Quản lý nhân viên &amp; công việc</h2>
+    <div class="cards">
+      <a class="card" href="staff-task.html">
+        <span class="badge plain">PLAIN</span>
+        <div class="title">Daily Staff and Task Report</div>
+        <div class="meta">Cập nhật 11:30 hằng ngày (T2-T6)</div>
+      </a>
+      <a class="card" href="manhours.html">
+        <span class="badge styled">BIỂU ĐỒ &amp; DASHBOARD</span>
+        <div class="title">Weekly Manhours &amp; Budget Report</div>
+        <div class="meta">Tuần 02/11 - 08/11 (có biểu đồ tròn Budget 30-02)</div>
+      </a>
+      <a class="card" href="deadline-lookahead.html">
+        <span class="badge plain">PLAIN</span>
+        <div class="title">Weekly Deadline Look-ahead</div>
+        <div class="meta">Cập nhật 9:30 Thứ Hai</div>
+      </a>
+      <a class="card" href="client-report.html">
+        <span class="badge plain">PLAIN</span>
+        <div class="title">Weekly Client Report</div>
+        <div class="meta">Cập nhật 18:00 Thứ Sáu</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="group">
+    <h2><span class="dot"></span>Tra cứu</h2>
+    <div class="cards">
+      <a class="card" href="catalogue.html">
+        <span class="badge plain">PLAIN</span>
+        <div class="title">Report Catalogue</div>
+        <div class="meta">Danh mục tất cả báo cáo quản lý</div>
+      </a>
+    </div>
+  </div>
+
+</main>
+<footer>
+  Trang được Javis tự cập nhật sau mỗi lần chạy báo cáo, đẩy thẳng lên GitHub Pages.
+  Link này là link web thật (<code>https://haquangtgcorp-gif.github.io/tg-2018-reports/</code>), bookmark là dùng mãi mãi.
+</footer>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2018 Crushing and Screening - 2D Drawings Stage Report (Mechanical and Fabrication)</title>
+<style>
+:root{
+  --ink:#1d2433; --sub:#475467; --line:#e2e5eb; --bg:#f4f6f9; --card:#ffffff;
+  --dc:#047857; --dn:#34b38a; --ip:#2563eb; --ns:#d97706; --alert:#dc2626;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:'Segoe UI',Arial,sans-serif;color:var(--ink);background:var(--bg)}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 20px 56px}
+.hdr{display:flex;align-items:center;gap:16px;padding:18px 4px;border-bottom:3px solid var(--ink);margin-bottom:18px;flex-wrap:wrap}
+.hdr img{height:46px}
+.hdr .ttl{flex:1;min-width:220px}
+.hdr h1{margin:0;font-size:22px;font-weight:800;letter-spacing:.2px}
+.hdr .sub{margin:2px 0 0;color:var(--sub);font-size:13px}
+.hdr .meta{text-align:right;font-size:12px;color:var(--sub);line-height:1.5}
+.badge-live{display:inline-block;background:#ecfdf5;color:var(--dc);border:1px solid #a7f3d0;border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700;letter-spacing:.3px}
+
+.headline{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--ip);border-radius:10px;padding:14px 18px;margin-bottom:18px;font-size:14px;line-height:1.5;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:22px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(16,24,40,.04);transition:transform .15s}
+.kpi:hover{transform:translateY(-2px)}
+.kpi.alert{border-left:4px solid var(--alert)}
+.kpi .v{font-size:24px;font-weight:800;line-height:1}
+.kpi .l{font-size:12px;font-weight:700;color:var(--ink);margin-top:4px}
+.kpi .s{font-size:11px;color:var(--sub);margin-top:3px;line-height:1.35}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+.card h2{margin:0 0 12px;font-size:15px;font-weight:800}
+
+.stage{margin-bottom:14px}
+.stage:last-child{margin-bottom:0}
+.stage-h{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;margin-bottom:5px}
+.stage-h b{font-size:13.5px}
+.stage-h span{color:var(--sub)}
+.bar{display:flex;height:18px;border-radius:5px;overflow:hidden;background:#eef1f5}
+.seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:10.5px;font-weight:700}
+.dc{background:var(--dc)} .ip{background:var(--ip)} .ns{background:var(--ns);color:#1d2433}
+.legend{display:flex;gap:14px;font-size:11.5px;color:var(--sub);margin-bottom:12px;flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+
+table{width:100%;border-collapse:collapse;font-size:13px}
+table th{background:var(--ink);color:#fff;text-align:left;padding:8px 10px;font-weight:600;font-size:12px}
+table td{padding:7px 10px;border-bottom:1px solid var(--line)}
+td.num,th.num{text-align:right}
+td.mono{font-family:Consolas,monospace;font-weight:700}
+table.small{font-size:12.3px}
+
+.pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:700}
+.st-ip{background:#dbeafe;color:#1d4ed8}
+.st-ns{background:#fef3c7;color:#92400e}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;align-items:center}
+.filters .grp-label{font-size:11.5px;color:var(--sub);font-weight:700;margin-right:2px}
+.flt{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:20px;padding:5px 13px;font-size:12.5px;font-weight:600;cursor:pointer;transition:.12s}
+.flt:hover{border-color:var(--ip)}
+.flt.active{background:var(--ip);border-color:var(--ip);color:#fff}
+.count-tag{font-size:11.5px;color:var(--sub);margin-left:auto}
+
+.box{border-left:4px solid var(--line);border-radius:8px;padding:10px 14px;margin-bottom:10px;font-size:13.3px;line-height:1.55;background:#fafbfc}
+.box:last-child{margin-bottom:0}
+.box h3{margin:0 0 4px;font-size:13.5px}
+.box.b1{border-left-color:var(--alert)}
+.box.b2{border-left-color:var(--ns)}
+.box.b3{border-left-color:#f2b705}
+.box.b4{border-left-color:var(--ip)}
+
+ol.act{margin:0;padding-left:20px;font-size:13.5px;line-height:1.6}
+ol.act li{margin-bottom:6px}
+
+.contacts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.contact{border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:12.6px;line-height:1.5}
+.contact h3{margin:0 0 4px;font-size:13px}
+
+footer{margin-top:10px;padding-top:12px;border-top:1px solid var(--line);font-size:11.5px;color:var(--sub);line-height:1.5}
+
+@media (max-width:900px){.kpis{grid-template-columns:repeat(3,1fr)} .contacts{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.kpis{grid-template-columns:1fr} .hdr{flex-direction:column;align-items:flex-start} .hdr .meta{text-align:left} .contacts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" style="height:46px;width:auto;display:block;flex:none"><rect width="120" height="40" rx="6" fill="#16233f"/><text x="60" y="27" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="800" letter-spacing="1" fill="#eaf1ff" text-anchor="middle">T&amp;G</text></svg>
+    <div class="ttl">
+      <h1>Crushing and Screening: 2D Drawings Stage Report (Mechanical and Fabrication)</h1>
+      <p class="sub">Project 2018 - Rhodes Ridge 10MTPA &middot; 89 modules in scope (37 Crushing, 15 Screening, 36 Area 60, 1 Area 70)</p>
+    </div>
+    <div class="meta">
+      <span class="badge-live">LIVE &middot; auto-updated daily</span><br>
+      Report date 10/11/2026<br>
+      Data as of 06/11/2026 16:02 AWST
+    </div>
+  </div>
+
+  <p class="headline">26 of 89 modules have 2D drawing not complete: 14 Mechanical, 12 Fabrication. Nine are blocked until the 3D model or its approval closes, 8 show 100% in the log while work is still pending, and 18 of the 26 have no assignee in the log.</p>
+
+  <div class="kpis">
+    <div class="kpi alert"><div class="v">26</div><div class="l">Modules with 2D not complete</div><div class="s">of 89. Crushing 5, Screening 0, Area 60 20, Area 70 1</div></div>
+    <div class="kpi"><div class="v">14</div><div class="l">Mechanical not complete</div><div class="s">10 in progress (60-40 per register), 4 not started</div></div>
+    <div class="kpi"><div class="v">12</div><div class="l">Fabrication not complete</div><div class="s">4 in progress, 8 not started</div></div>
+    <div class="kpi alert"><div class="v">9</div><div class="l">Blocked by 3D or approval</div><div class="s">2D cannot close until the model is approved</div></div>
+    <div class="kpi"><div class="v">8</div><div class="l">100% in log, work still pending</div><div class="s">6 Screening, 2 Crushing</div></div>
+    <div class="kpi"><div class="v">18</div><div class="l">Assignee blank in log</div><div class="s">of the 26. Some are being worked per WhatsApp</div></div>
+  </div>
+
+  <div class="card">
+    <h2>Progress by drawing type (number of applicable modules)</h2>
+    <div class="legend">
+      <span><i style="background:var(--dc)"></i>Done &amp; checked</span>
+      <span><i style="background:var(--ip)"></i>In progress</span>
+      <span><i style="background:var(--ns)"></i>Not started</span>
+    </div>
+    <div class="stage"><div class="stage-h"><b>2D Mechanical Drawing</b><span>5 of 19 applicable modules done &middot; 70 n/a</span></div>
+      <div class="bar"><div class="seg dc" style="flex:5">5</div><div class="seg ip" style="flex:10">10</div><div class="seg ns" style="flex:4">4</div></div></div>
+    <div class="stage"><div class="stage-h"><b>2D Fabrication Drawing</b><span>61 of 73 applicable modules done &middot; 16 n/a</span></div>
+      <div class="bar"><div class="seg dc" style="flex:61">61</div><div class="seg ip" style="flex:4">4</div><div class="seg ns" style="flex:8">8</div></div></div>
+  </div>
+
+  <div class="card">
+    <h2>Open items by module &mdash; filter below</h2>
+    <div class="filters">
+      <span class="grp-label">Area:</span>
+      <button class="flt active" data-f="area" data-v="all">All</button>
+      <button class="flt" data-f="area" data-v="Crushing">Crushing</button><button class="flt" data-f="area" data-v="Screening">Screening</button><button class="flt" data-f="area" data-v="Area 60">Area 60</button><button class="flt" data-f="area" data-v="Area 70">Area 70</button>
+      <span class="grp-label" style="margin-left:10px">Type:</span>
+      <button class="flt active" data-f="type" data-v="all">All</button>
+      <button class="flt" data-f="type" data-v="Mechanical">Mechanical</button><button class="flt" data-f="type" data-v="Fabrication">Fabrication</button>
+      <span class="count-tag" id="cnt"></span>
+    </div>
+    <table id="openTbl" class="small">
+      <thead><tr><th>Module</th><th>Area</th><th>Drawing type</th><th>Status</th><th class="num">Progress</th></tr></thead>
+      <tbody>
+<tr data-area="Area 60" data-type="Mechanical" data-status="In Progress"><td class="mono">60-12</td><td>Area 60</td><td>Mechanical</td><td><span class="pill st-ip">In Progress</span></td><td class="num">33%</td></tr>
+<tr data-area="Area 60" data-type="Mechanical" data-status="In Progress"><td class="mono">60-13</td><td>Area 60</td><td>Mechanical</td><td><span class="pill st-ip">In Progress</span></td><td class="num">33%</td></tr>
+<tr data-area="Area 60" data-type="Mechanical" data-status="In Progress"><td class="mono">60-22</td><td>Area 60</td><td>Mechanical</td><td><span class="pill st-ip">In Progress</span></td><td class="num">50%</td></tr>
+<tr data-area="Area 60" data-type="Mechanical" data-status="In Progress"><td class="mono">60-24</td><td>Area 60</td><td>Mechanical</td><td><span class="pill st-ip">In Progress</span></td><td class="num">90%</td></tr>
+<tr data-area="Area 60" data-type="Mechanical" data-status="In Progress"><td class="mono">60-27</td><td>Area 60</td><td>Mechanical</td><td><span class="pill st-ip">In Progress</span></td><td class="num">90%</td></tr>
+<tr data-area="Area 60" data-type="Mechanical" data-status="In Progress"><td class="mono">60-40</td><td>Area 60</td><td>Mechanical</td><td><span class="pill st-ip">In Progress</span></td><td class="num">log N/A, register 90%</td></tr>
+<tr data-area="Area 60" data-type="Mechanical" data-status="In Progress"><td class="mono">60-41</td><td>Area 60</td><td>Mechanical</td><td><span class="pill st-ip">In Progress</span></td><td class="num">72%</td></tr>
+<tr data-area="Area 60" data-type="Mechanical" data-status="In Progress"><td class="mono">60-42</td><td>Area 60</td><td>Mechanical</td><td><span class="pill st-ip">In Progress</span></td><td class="num">72%</td></tr>
+<tr data-area="Area 60" data-type="Mechanical" data-status="In Progress"><td class="mono">60-63</td><td>Area 60</td><td>Mechanical</td><td><span class="pill st-ip">In Progress</span></td><td class="num">90%</td></tr>
+<tr data-area="Area 60" data-type="Mechanical" data-status="In Progress"><td class="mono">60-64</td><td>Area 60</td><td>Mechanical</td><td><span class="pill st-ip">In Progress</span></td><td class="num">90%</td></tr>
+<tr data-area="Area 60" data-type="Mechanical" data-status="Not Started"><td class="mono">60-02</td><td>Area 60</td><td>Mechanical</td><td><span class="pill st-ns">Not Started</span></td><td class="num">0%</td></tr>
+<tr data-area="Area 60" data-type="Mechanical" data-status="Not Started"><td class="mono">60-03</td><td>Area 60</td><td>Mechanical</td><td><span class="pill st-ns">Not Started</span></td><td class="num">0%</td></tr>
+<tr data-area="Area 60" data-type="Mechanical" data-status="Not Started"><td class="mono">60-08</td><td>Area 60</td><td>Mechanical</td><td><span class="pill st-ns">Not Started</span></td><td class="num">0%</td></tr>
+<tr data-area="Area 60" data-type="Mechanical" data-status="Not Started"><td class="mono">60-09</td><td>Area 60</td><td>Mechanical</td><td><span class="pill st-ns">Not Started</span></td><td class="num">0%</td></tr>
+<tr data-area="Crushing" data-type="Fabrication" data-status="In Progress"><td class="mono">20-08</td><td>Crushing</td><td>Fabrication</td><td><span class="pill st-ip">In Progress</span></td><td class="num">90%</td></tr>
+<tr data-area="Crushing" data-type="Fabrication" data-status="In Progress"><td class="mono">20-32</td><td>Crushing</td><td>Fabrication</td><td><span class="pill st-ip">In Progress</span></td><td class="num">70%</td></tr>
+<tr data-area="Crushing" data-type="Fabrication" data-status="In Progress"><td class="mono">2000</td><td>Crushing</td><td>Fabrication</td><td><span class="pill st-ip">In Progress</span></td><td class="num">90%</td></tr>
+<tr data-area="Area 70" data-type="Fabrication" data-status="In Progress"><td class="mono">70-09</td><td>Area 70</td><td>Fabrication</td><td><span class="pill st-ip">In Progress</span></td><td class="num">20%</td></tr>
+<tr data-area="Crushing" data-type="Fabrication" data-status="Not Started"><td class="mono">20-60</td><td>Crushing</td><td>Fabrication</td><td><span class="pill st-ns">Not Started</span></td><td class="num">0%</td></tr>
+<tr data-area="Crushing" data-type="Fabrication" data-status="Not Started"><td class="mono">20-61</td><td>Crushing</td><td>Fabrication</td><td><span class="pill st-ns">Not Started</span></td><td class="num">0%</td></tr>
+<tr data-area="Area 60" data-type="Fabrication" data-status="Not Started"><td class="mono">60-28</td><td>Area 60</td><td>Fabrication</td><td><span class="pill st-ns">Not Started</span></td><td class="num">0%</td></tr>
+<tr data-area="Area 60" data-type="Fabrication" data-status="Not Started"><td class="mono">60-30</td><td>Area 60</td><td>Fabrication</td><td><span class="pill st-ns">Not Started</span></td><td class="num">0%</td></tr>
+<tr data-area="Area 60" data-type="Fabrication" data-status="Not Started"><td class="mono">60-52</td><td>Area 60</td><td>Fabrication</td><td><span class="pill st-ns">Not Started</span></td><td class="num">0%</td></tr>
+<tr data-area="Area 60" data-type="Fabrication" data-status="Not Started"><td class="mono">60-55</td><td>Area 60</td><td>Fabrication</td><td><span class="pill st-ns">Not Started</span></td><td class="num">0%</td></tr>
+<tr data-area="Area 60" data-type="Fabrication" data-status="Not Started"><td class="mono">60-56</td><td>Area 60</td><td>Fabrication</td><td><span class="pill st-ns">Not Started</span></td><td class="num">0%</td></tr>
+<tr data-area="Area 60" data-type="Fabrication" data-status="Not Started"><td class="mono">60-68</td><td>Area 60</td><td>Fabrication</td><td><span class="pill st-ns">Not Started</span></td><td class="num">0%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Bottlenecks</h2>
+    <div class="box b1"><h3>1. 2D waiting on 3D model or approval: 9 modules</h3></div>
+    <div class="box b2"><h3>2. Drawn, but check or sign-off not closed: 9 modules</h3></div>
+    <div class="box b3"><h3>3. Little or no 2D started, no owner in log: 8 modules</h3></div>
+    <div class="box b4"><h3>4. Progress Log does not match Register and WhatsApp</h3></div>
+  </div>
+
+  <div class="card">
+    <h2>Action items</h2>
+    <ol class="act">
+      <li><b>Quang: book one 3D approval session with Sam.</b> Cover 60-08, 60-09, 60-28, 60-56, 20-08, 30-02, 30-18. This releases the most 2D work.</li>
+      <li><b>Quang: set a check date for the Mechanical queue.</b> 60-40, 60-41, 60-42, 60-63, 60-64 with Sam and Jayson. Sam to confirm if the 19/10 hold on 60-41 still applies.</li>
+      <li><b>Quang: decide scope of the "TBC" modules.</b> 20-60, 2000 and 30-22 are "Not included in shipping list". Decide draft or drop before assigning people.</li>
+      <li><b>Quang: assign owners for the 8 modules in bottleneck 3.</b> Log has no name on 20-60, 20-61, 60-02, 60-03, 60-30, 60-52, 60-55, 70-09.</li>
+      <li><b>Quang: decide Aldrin's load.</b> Aldrin holds 30-02 updates, 60-28, 60-41, 60-42, 60-63, 60-64, plus 2 hours per day on AI (message 05/11). Consider moving part of this.</li>
+      <li><b>Name one person to correct the log and register</b>, including 60-40 and module status.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Who to follow up with</h2>
+    <div class="contacts">
+      <div class="contact"><h3>Sam and Jayson</h3>Approve and check the Mechanical and Fabrication queues.</div>
+      <div class="contact"><h3>Aldrin</h3>30-02 updates, 60-28, 60-41, 60-42, 60-63, 60-64.</div>
+      <div class="contact"><h3>Lucas and Maverick</h3>Little/no 2D started, no owner: 20-60, 20-61, 60-02, 60-03, 60-30, 60-52, 60-55, 70-09.</div>
+      <div class="contact"><h3>Quang</h3>Approval session, TBC scope, Aldrin's load, log correction owner.</div>
+    </div>
+  </div>
+
+  <footer>
+    Source: T&amp;G Projects Client Deliverables Progress Log, tab 2018-RHODES RIDGE 10MTPA (last edited 06/11/2026 16:02 AWST); 2018-Rhodes Ridge Fabrication &amp; Mechanical Drawings Register; WhatsApp 2018 group messages. Read 11/11/2026.
+    Progress Log not updated since 06/11/2026 16:02 AWST.
+    <br>2D Drawings Stage Report (Mechanical and Fabrication) &middot; web version &middot; matching PDF: 2018_Crushing_Screening_2D_Drawings_Mech_Fab_Stage_Report_2026-11-10.pdf
+  </footer>
+
+</div>
+
+<script>
+const state = { area: "all", type: "all" };
+document.querySelectorAll(".flt").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const f = btn.dataset.f, v = btn.dataset.v;
+    state[f] = v;
+    document.querySelectorAll('.flt[data-f="' + f + '"]').forEach(b => b.classList.toggle("active", b === btn));
+    applyFilter();
+  });
+});
+function applyFilter(){
+  let shown = 0;
+  document.querySelectorAll("#openTbl tbody tr").forEach(tr => {
+    const okArea = state.area === "all" || tr.dataset.area === state.area;
+    const okType = state.type === "all" || tr.dataset.type === state.type;
+    const show = okArea && okType;
+    tr.style.display = show ? "" : "none";
+    if (show) shown++;
+  });
+  document.getElementById("cnt").textContent = shown + " of 26 items shown";
+}
+applyFilter();
+</script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2018 Crushing and Screening - 2D Drawings Stage Report (Concrete and Piping)</title>
+<style>
+:root{
+  --ink:#1d2433; --sub:#475467; --line:#e2e5eb; --bg:#f4f6f9; --card:#ffffff;
+  --dc:#047857; --ip:#2563eb; --ns:#d97706; --alert:#dc2626;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:'Segoe UI',Arial,sans-serif;color:var(--ink);background:var(--bg)}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 20px 56px}
+.hdr{display:flex;align-items:center;gap:16px;padding:18px 4px;border-bottom:3px solid var(--ink);margin-bottom:18px;flex-wrap:wrap}
+.hdr img{height:46px}
+.hdr .ttl{flex:1;min-width:220px}
+.hdr h1{margin:0;font-size:22px;font-weight:800;letter-spacing:.2px}
+.hdr .sub{margin:2px 0 0;color:var(--sub);font-size:13px}
+.hdr .meta{text-align:right;font-size:12px;color:var(--sub);line-height:1.5}
+.badge-live{display:inline-block;background:#ecfdf5;color:var(--dc);border:1px solid #a7f3d0;border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700;letter-spacing:.3px}
+
+.headline{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--ip);border-radius:10px;padding:14px 18px;margin-bottom:18px;font-size:14px;line-height:1.5;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:22px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(16,24,40,.04);transition:transform .15s}
+.kpi:hover{transform:translateY(-2px)}
+.kpi.alert{border-left:4px solid var(--alert)}
+.kpi .v{font-size:22px;font-weight:800;line-height:1}
+.kpi .l{font-size:12px;font-weight:700;color:var(--ink);margin-top:4px}
+.kpi .s{font-size:11px;color:var(--sub);margin-top:3px;line-height:1.35}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+.card h2{margin:0 0 12px;font-size:15px;font-weight:800}
+
+table{width:100%;border-collapse:collapse;font-size:13px}
+table th{background:var(--ink);color:#fff;text-align:left;padding:8px 10px;font-weight:600;font-size:12px}
+table td{padding:7px 10px;border-bottom:1px solid var(--line)}
+td.mono{font-family:Consolas,monospace;font-weight:700}
+table.small{font-size:12.3px}
+
+.pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:700}
+.st-ip{background:#dbeafe;color:#1d4ed8}
+.st-ns{background:#fef3c7;color:#92400e}
+.st-open{background:#fee2e2;color:#991b1b}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;align-items:center}
+.filters .grp-label{font-size:11.5px;color:var(--sub);font-weight:700;margin-right:2px}
+.flt{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:20px;padding:5px 13px;font-size:12.5px;font-weight:600;cursor:pointer;transition:.12s}
+.flt:hover{border-color:var(--ip)}
+.flt.active{background:var(--ip);border-color:var(--ip);color:#fff}
+.count-tag{font-size:11.5px;color:var(--sub);margin-left:auto}
+
+.box{border-left:4px solid var(--line);border-radius:8px;padding:10px 14px;margin-bottom:10px;font-size:13.3px;line-height:1.55;background:#fafbfc}
+.box:last-child{margin-bottom:0}
+.box h3{margin:0 0 4px;font-size:13.5px}
+.box.b1{border-left-color:var(--alert)}
+.box.b2{border-left-color:var(--ns)}
+.box.b3{border-left-color:#f2b705}
+.box.b4{border-left-color:var(--ip)}
+
+ol.act{margin:0;padding-left:20px;font-size:13.5px;line-height:1.6}
+ol.act li{margin-bottom:6px}
+
+.contacts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.contact{border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:12.6px;line-height:1.5}
+.contact h3{margin:0 0 4px;font-size:13px}
+
+footer{margin-top:10px;padding-top:12px;border-top:1px solid var(--line);font-size:11.5px;color:var(--sub);line-height:1.5}
+
+@media (max-width:900px){.kpis{grid-template-columns:repeat(3,1fr)} .contacts{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.kpis{grid-template-columns:1fr} .hdr{flex-direction:column;align-items:flex-start} .hdr .meta{text-align:left} .contacts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" style="height:46px;width:auto;display:block;flex:none"><rect width="120" height="40" rx="6" fill="#16233f"/><text x="60" y="27" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="800" letter-spacing="1" fill="#eaf1ff" text-anchor="middle">T&amp;G</text></svg>
+    <div class="ttl">
+      <h1>Crushing and Screening: 2D Drawings Stage Report (Concrete and Piping)</h1>
+      <p class="sub">Project 2018 - Rhodes Ridge 10MTPA &middot; module 00-01 concrete package, plus piping items 00-04, 00-00-05, 30-22</p>
+    </div>
+    <div class="meta">
+      <span class="badge-live">LIVE &middot; auto-updated daily</span><br>
+      Report date 10/11/2026<br>
+      Data as of 06/11/2026 16:02 AWST
+    </div>
+  </div>
+
+  <p class="headline">All 16 concrete sheets in 00-01 are not complete: 12 drawn and waiting for check (oldest since 3 Sep), 4 not started with no drafter. Reinforcement is being drawn ahead of the concrete calculations, and piping is not final so concrete slabs cannot close.</p>
+
+  <div class="kpis">
+    <div class="kpi alert"><div class="v">16</div><div class="l">Concrete sheets not complete</div><div class="s">All in 00-01. 0 issued, 0 back-checked</div></div>
+    <div class="kpi"><div class="v">12</div><div class="l">Drawn, waiting for check</div><div class="s">For Checking 70%. Oldest dated 3 Sep</div></div>
+    <div class="kpi alert"><div class="v">4</div><div class="l">Not started</div><div class="s">01-12, 01-20, 01-36, 01-38. No drafter</div></div>
+    <div class="kpi"><div class="v">3</div><div class="l">Piping items open</div><div class="s">00-04, 00-00-05, 30-22. 20-20 is complete</div></div>
+    <div class="kpi"><div class="v">5 of 6</div><div class="l">Concrete calcs Unassigned</div><div class="s">4 in 00-01 no due date, 60-29 due 13/11</div></div>
+    <div class="kpi"><div class="v">3</div><div class="l">Sheets with no checker</div><div class="s">01-11, 01-30, 01-31</div></div>
+  </div>
+
+  <div class="card">
+    <h2>Open items &mdash; filter below</h2>
+    <div class="filters">
+      <span class="grp-label">Type:</span>
+      <button class="flt active" data-f="type" data-v="all">All</button>
+      <button class="flt" data-f="type" data-v="Concrete sheet">Concrete sheet</button><button class="flt" data-f="type" data-v="Piping">Piping</button>
+      <span class="grp-label" style="margin-left:10px">Status:</span>
+      <button class="flt active" data-f="status" data-v="all">All</button>
+      <button class="flt" data-f="status" data-v="For Checking">For Checking</button><button class="flt" data-f="status" data-v="Not Started">Not Started</button><button class="flt" data-f="status" data-v="Open">Open</button>
+      <span class="count-tag" id="cnt"></span>
+    </div>
+    <table id="openTbl" class="small">
+      <thead><tr><th>Item</th><th>Type</th><th>Status</th><th>Note</th></tr></thead>
+      <tbody>
+<tr data-type="Concrete sheet" data-status="For Checking"><td class="mono">01-01</td><td>Concrete sheet</td><td><span class="pill st-ip">For Checking</span></td><td>70%</td></tr>
+<tr data-type="Concrete sheet" data-status="For Checking"><td class="mono">01-08</td><td>Concrete sheet</td><td><span class="pill st-ip">For Checking</span></td><td>dated 13/10, no checker</td></tr>
+<tr data-type="Concrete sheet" data-status="For Checking"><td class="mono">01-10</td><td>Concrete sheet</td><td><span class="pill st-ip">For Checking</span></td><td>70%</td></tr>
+<tr data-type="Concrete sheet" data-status="For Checking"><td class="mono">01-11</td><td>Concrete sheet</td><td><span class="pill st-ip">For Checking</span></td><td>dated 21/10, no checker</td></tr>
+<tr data-type="Concrete sheet" data-status="For Checking"><td class="mono">01-13</td><td>Concrete sheet</td><td><span class="pill st-ip">For Checking</span></td><td>dated 14/10, 70%</td></tr>
+<tr data-type="Concrete sheet" data-status="For Checking"><td class="mono">01-19</td><td>Concrete sheet</td><td><span class="pill st-ip">For Checking</span></td><td>70%, wear plates decision pending</td></tr>
+<tr data-type="Concrete sheet" data-status="For Checking"><td class="mono">01-22</td><td>Concrete sheet</td><td><span class="pill st-ip">For Checking</span></td><td>apply 12/10 comments</td></tr>
+<tr data-type="Concrete sheet" data-status="For Checking"><td class="mono">01-23</td><td>Concrete sheet</td><td><span class="pill st-ip">For Checking</span></td><td>apply 12/10 comments</td></tr>
+<tr data-type="Concrete sheet" data-status="For Checking"><td class="mono">01-30</td><td>Concrete sheet</td><td><span class="pill st-ip">For Checking</span></td><td>dated 20/10, no checker</td></tr>
+<tr data-type="Concrete sheet" data-status="For Checking"><td class="mono">01-31</td><td>Concrete sheet</td><td><span class="pill st-ip">For Checking</span></td><td>no checker</td></tr>
+<tr data-type="Concrete sheet" data-status="For Checking"><td class="mono">01-35</td><td>Concrete sheet</td><td><span class="pill st-ip">For Checking</span></td><td>waiting since 3 Sep</td></tr>
+<tr data-type="Concrete sheet" data-status="For Checking"><td class="mono">01-37</td><td>Concrete sheet</td><td><span class="pill st-ip">For Checking</span></td><td>waiting since 3 Sep</td></tr>
+<tr data-type="Concrete sheet" data-status="Not Started"><td class="mono">01-12</td><td>Concrete sheet</td><td><span class="pill st-ns">Not Started</span></td><td>no drafter, location to confirm</td></tr>
+<tr data-type="Concrete sheet" data-status="Not Started"><td class="mono">01-20</td><td>Concrete sheet</td><td><span class="pill st-ns">Not Started</span></td><td>no drafter</td></tr>
+<tr data-type="Concrete sheet" data-status="Not Started"><td class="mono">01-36</td><td>Concrete sheet</td><td><span class="pill st-ns">Not Started</span></td><td>no drafter</td></tr>
+<tr data-type="Concrete sheet" data-status="Not Started"><td class="mono">01-38</td><td>Concrete sheet</td><td><span class="pill st-ns">Not Started</span></td><td>no drafter</td></tr>
+<tr data-type="Piping" data-status="Open"><td class="mono">00-04</td><td>Piping</td><td><span class="pill st-open">Open</span></td><td>resume or stay paused - decision needed</td></tr>
+<tr data-type="Piping" data-status="Open"><td class="mono">00-00-05</td><td>Piping</td><td><span class="pill st-open">Open</span></td><td>open per source register</td></tr>
+<tr data-type="Piping" data-status="Open"><td class="mono">30-22</td><td>Piping</td><td><span class="pill st-open">Open</span></td><td>100% in log but pipe being re-routed</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Bottlenecks</h2>
+    <div class="box b1"><h3>1. Concrete sheets are drawn but nobody has checked them</h3></div>
+    <div class="box b2"><h3>2. Piping is not final, so concrete slabs cannot close</h3></div>
+    <div class="box b3"><h3>3. Reinforcement is drawn ahead of concrete calculations</h3></div>
+    <div class="box b4"><h3>4. 30-22 shows 100% in log, but the pipe is being re-routed</h3></div>
+  </div>
+
+  <div class="card">
+    <h2>Action items</h2>
+    <ol class="act">
+      <li><b>Quang: set a check date for the 12 concrete sheets.</b> Name a checker for 01-11, 01-30 and 01-31.</li>
+      <li><b>Quang and Sam: decide 00-04 Piping.</b> Resume or stay paused, name the owner. Also decide whether concrete is checked now and revised later for conduits.</li>
+      <li><b>Quang: assign the concrete calculations.</b> Sam to confirm what the reinforcement sheets are based on until those are done.</li>
+      <li><b>Sam and Aldrin: close the 30-22 re-route.</b> Then revise 2D and settle "Not included in shipping list".</li>
+      <li><b>Quang: assign drafters for 4 sheets not started.</b> 01-20, 01-36, 01-38, and 01-12 once its location is confirmed.</li>
+      <li><b>Name one person to align the registers.</b> Log, Drawing Register, Concrete Register and client tab differ.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Who to follow up with</h2>
+    <div class="contacts">
+      <div class="contact"><h3>Sam and checker SP</h3>Check date and checker name for the 12 sheets waiting.</div>
+      <div class="contact"><h3>LCP and DTT</h3>Drafting of the 4 sheets not started.</div>
+      <div class="contact"><h3>Aldrin and TNQ</h3>30-22 re-route and concrete calculation basis.</div>
+      <div class="contact"><h3>Quang</h3>00-04 decision, calc assignment, register alignment owner.</div>
+    </div>
+  </div>
+
+  <footer>
+    Source: T&amp;G Projects Client Deliverables Progress Log, tab 2018-RHODES RIDGE 10MTPA (last edited 06/11/2026 16:02 AWST); 2018-Engineering Calculation Registry; Drawing Register. Read 11/11/2026.
+    Progress Log not updated since 06/11/2026 16:02 AWST.
+    <br>2D Drawings Stage Report (Concrete and Piping) &middot; web version &middot; matching PDF: 2018_Crushing_Screening_2D_Drawings_Concrete_Piping_Stage_Report_2026-11-10.pdf
+  </footer>
+
+</div>
+
+<script>
+const state = { type: "all", status: "all" };
+document.querySelectorAll(".flt").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const f = btn.dataset.f, v = btn.dataset.v;
+    state[f] = v;
+    document.querySelectorAll('.flt[data-f="' + f + '"]').forEach(b => b.classList.toggle("active", b === btn));
+    applyFilter();
+  });
+});
+function applyFilter(){
+  let shown = 0;
+  document.querySelectorAll("#openTbl tbody tr").forEach(tr => {
+    const okType = state.type === "all" || tr.dataset.type === state.type;
+    const okStatus = state.status === "all" || tr.dataset.status === state.status;
+    const show = okType && okStatus;
+    tr.style.display = show ? "" : "none";
+    if (show) shown++;
+  });
+  document.getElementById("cnt").textContent = shown + " of 19 items shown";
+}
+applyFilter();
+</script>
+</body>
+</html>

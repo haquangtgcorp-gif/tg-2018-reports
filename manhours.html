@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2018 Rhodes Ridge - Weekly Manhours &amp; Budget Dashboard (02/11 to 08/11/2026)</title>
+<style>
+:root {
+  --bg: #f1f5f9;
+  --card: #ffffff;
+  --ink: #0f172a;
+  --sub: #64748b;
+  --line: #e2e8f0;
+  --blue: #2563eb;
+  --blue-bg: #eff6ff;
+  --blue-bd: #bfdbfe;
+  --green: #059669;
+  --green-bg: #ecfdf5;
+  --green-bd: #a7f3d0;
+  --amber: #d97706;
+  --amber-bg: #fffbeb;
+  --amber-bd: #fde68a;
+  --red: #dc2626;
+  --red-bg: #fef2f2;
+  --red-bd: #fecaca;
+  --purple: #7c3aed;
+  --purple-bg: #f5f3ff;
+  --purple-bd: #ddd6fe;
+  --grey: #94a3b8;
+  --grey-bg: #f8fafc;
+}
+* {
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 13.5px/1.5 "Segoe UI", system-ui, -apple-system, sans-serif;
+  padding: 20px 18px 56px;
+}
+.wrap { max-width: 1460px; margin: 0 auto; }
+
+/* TOPBAR */
+.topbar {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #f8fafc;
+  border-radius: 14px;
+  padding: 18px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
+}
+.brand { display: flex; align-items: center; gap: 16px; }
+.brand-logo {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.brand-logo svg { height: 34px; width: auto; display: block; }
+.topbar h1 { font-size: 21px; font-weight: 800; margin: 3px 0 4px; color: #ffffff; letter-spacing: 0.2px; }
+.topbar .meta { color: #cbd5e1; font-size: 12px; }
+.topbar .meta b { color: #ffffff; }
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #93c5fd;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.nav-link:hover { text-decoration: underline; color: #bfdbfe; }
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.b-live { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.4); }
+.b-risk { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-bd); }
+.b-watch { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-bd); }
+.b-ok { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-bd); }
+.b-na { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+.b-leave { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple-bd); }
+.b-blue { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-bd); }
+
+/* TABS */
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.tab-btn {
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  color: #e2e8f0;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.tab-btn:hover { background: rgba(255,255,255,0.16); color: #ffffff; }
+.tab-btn.active {
+  background: #3b82f6;
+  color: #ffffff;
+  border-color: #60a5fa;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
+}
+.print-btn {
+  border: 1px solid #10b981;
+  background: #059669;
+  color: #ffffff;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.print-btn:hover { background: #047857; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* HERO */
+.hero {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--red);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+.hero-title { font-weight: 800; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.hero ul { margin: 4px 0 0; padding-left: 18px; }
+.hero li { margin-bottom: 4px; }
+
+/* GRIDS & CARDS */
+.grid { display: grid; gap: 14px; margin-bottom: 14px; }
+.g6 { grid-template-columns: repeat(6, 1fr); }
+.g3 { grid-template-columns: repeat(3, 1fr); }
+.g2 { grid-template-columns: repeat(2, 1fr); }
+.g-7-5 { grid-template-columns: 7fr 5fr; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  break-inside: avoid;
+}
+.card h2 {
+  font-size: 15px;
+  font-weight: 800;
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 9px;
+}
+.card h2 .sub-hdr { font-size: 11.5px; font-weight: 500; color: var(--sub); }
+
+.kpi-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.kpi-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(15, 23, 42, 0.07); }
+.kpi-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--blue);
+}
+.kpi-card.k-red::before { background: var(--red); }
+.kpi-card.k-amber::before { background: var(--amber); }
+.kpi-card.k-green::before { background: var(--green); }
+.kpi-card.k-purple::before { background: var(--purple); }
+.kpi-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--sub); font-weight: 700; }
+.kpi-val { font-size: 23px; font-weight: 800; margin: 5px 0 3px; line-height: 1.15; }
+.kpi-sub { font-size: 11.5px; color: var(--sub); line-height: 1.35; }
+
+/* DONUT CHARTS */
+.donut-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.donut-box {
+  position: relative;
+  width: 168px;
+  height: 168px;
+  flex: none;
+  margin: 0 auto;
+}
+.donut-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+.donut-center .dc-val { font-size: 19px; font-weight: 800; line-height: 1.1; }
+.donut-center .dc-lbl { font-size: 10.5px; color: var(--sub); font-weight: 600; margin-top: 2px; }
+.donut-leg { flex: 1; min-width: 195px; }
+
+/* BULLET / COMPARATIVE BARS */
+.bchart-row {
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--line);
+}
+.bchart-row:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.bchart-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 12.5px;
+  margin-bottom: 5px;
+  gap: 8px;
+}
+.bchart-dual {
+  display: grid;
+  grid-template-columns: 62px 1fr 78px;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  margin: 3px 0;
+}
+.bchart-track {
+  position: relative;
+  height: 13px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.bchart-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+
+/* HORIZONTAL STAFF BARS */
+.bar-row {
+  display: grid;
+  grid-template-columns: 165px 1fr 125px;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0;
+  font-size: 12px;
+}
+.track {
+  position: relative;
+  height: 15px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: visible;
+  display: flex;
+}
+.fill-seg { height: 100%; }
+.fill-seg:first-child { border-radius: 4px 0 0 4px; }
+.fill-seg:last-child { border-radius: 0 4px 4px 0; }
+.line40 {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 0;
+  border-left: 2px dashed var(--red);
+  z-index: 2;
+}
+
+/* TABLES & FILTERS */
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+th, td { padding: 8px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+th {
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-top: 1px solid var(--line);
+}
+tr:hover td { background: #f8fafc; }
+tr.tot-row td {
+  font-weight: 800;
+  background: #f1f5f9;
+  border-top: 2px solid var(--ink);
+  border-bottom: none;
+}
+td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.mono { font-family: Consolas, "SFMono-Regular", monospace; font-weight: 700; color: #1e293b; }
+.mut { color: var(--sub); font-size: 11.5px; }
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+  align-items: center;
+  background: #f8fafc;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+.filters .grp-label { font-size: 11.5px; color: var(--sub); font-weight: 700; margin-right: 4px; }
+.flt {
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: var(--ink);
+  border-radius: 99px;
+  padding: 4px 12px;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.flt:hover { border-color: var(--blue); color: var(--blue); }
+.flt.active { background: var(--blue); border-color: var(--blue); color: #ffffff; }
+.count-tag { font-size: 11.5px; color: var(--sub); font-weight: 600; margin-left: auto; }
+
+.mini-prog {
+  width: 90px;
+  height: 7px;
+  background: #e2e8f0;
+  border-radius: 99px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.mini-prog > i { display: block; height: 100%; border-radius: 99px; }
+
+.alert-card {
+  border-left: 4px solid var(--grey);
+  background: #f8fafc;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 12.8px;
+  margin-bottom: 10px;
+}
+.alert-card:last-child { margin-bottom: 0; }
+.alert-card.red { border-left-color: var(--red); background: #fffbfa; }
+.alert-card.amb { border-left-color: var(--amber); background: #fffcf5; }
+.alert-card.blu { border-left-color: var(--blue); background: #f5f9ff; }
+
+footer {
+  margin-top: 18px;
+  padding: 14px 18px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 11.5px;
+  color: var(--sub);
+  line-height: 1.55;
+}
+
+@media (max-width: 1180px) {
+  .g6 { grid-template-columns: repeat(3, 1fr); }
+  .g3, .g2, .g-7-5 { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .g6 { grid-template-columns: repeat(2, 1fr); }
+  .bar-row { grid-template-columns: 120px 1fr 90px; }
+}
+
+@page { size: A3 landscape; margin: 10mm; }
+@media print {
+  body { background: #ffffff; padding: 0; font-size: 11px; }
+  .wrap { max-width: 100%; width: 100%; }
+  .tabs, .filters { display: none !important; }
+  .tab-panel { display: block !important; }
+  .g6 { grid-template-columns: repeat(6, 1fr) !important; }
+  .g3 { grid-template-columns: repeat(3, 1fr) !important; }
+  .g2 { grid-template-columns: repeat(2, 1fr) !important; }
+  .card { box-shadow: none; break-inside: avoid; page-break-inside: avoid; padding: 10px 12px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-logo">
+        <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+          <rect width="120" height="40" rx="6" fill="#0f172a"/>
+          <text x="60" y="27" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="800" letter-spacing="1.2" fill="#ffffff" text-anchor="middle">T&amp;G</text>
+        </svg>
+      </div>
+      <div>
+        <a class="nav-link" href="index.html">&#8592; Back to 2018 Report Catalogue</a>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span class="badge b-live">LIVE WEB DASHBOARD</span>
+          <span style="font-size:11.5px;color:#94a3b8">Project 2018 &middot; Rhodes Ridge 10MTPA</span>
+        </div>
+        <h1>Weekly Manhours &amp; ClickUp Budget Report: Mon 02/11 to Sun 08/11/2026</h1>
+        <div class="meta">
+          Report Date: <b>09/11/2026</b> &middot; Timesheet Cutoff: <b>08/11/2026</b> &middot; ClickUp Time Estimate Read: <b>12/11/2026 10:39 AWST</b> &middot; Stage '4. Drafting' merged into '3. Drafting'
+        </div>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showTab('all', this)">All Sections</button>
+      <button class="tab-btn" onclick="showTab('charts', this)">1. Visual Charts</button>
+      <button class="tab-btn" onclick="showTab('b3002', this)">2. 30-02 Budget Table</button>
+      <button class="tab-btn" onclick="showTab('mods', this)">3. 2018 Modules</button>
+      <button class="tab-btn" onclick="showTab('staff', this)">4. Staff Hours</button>
+      <button class="print-btn" onclick="window.print()">Print A3 / PDF</button>
+    </div>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <div class="hero">
+    <div class="hero-title">
+      <span class="badge b-risk">BUDGET OVERRUN ALERT</span>
+      <span>Executive Summary: Week 02/11 to 08/11/2026 &amp; Module 30-02 ClickUp Budget</span>
+    </div>
+    <ul>
+      <li><b>Module 30-02 Total Budget vs Actual:</b> ClickUp <i>Module Information</i> holds a total Time Estimate of <b>138h 00m</b> (<b>136h 00m applicable</b>, excluding 2h 00m N/A Research). Cumulative tracked time reached <b>194h 43m</b> (<b>141.1%</b> of total budget, <b>+56h 43m over</b>; 143.2% of applicable budget) at <b>86.7% overall progress</b>.</li>
+      <li><b>Primary Overrun Driver (4. Engineering Calculation):</b> Consumed <b>106h 59m against a 24h 00m budget (446%, +82h 59m over)</b> while Structural progress is at <b>40%</b>. Two Structural tasks remain open: <i>Load &amp; Structural Analysis</i> (67h 46m) and <i>Loading Analysis for Screening area</i> (27h 01m, Christopher).</li>
+      <li><b>3D Model &amp; Drafting Near Budget Cap:</b> <b>2. 3D Model</b> is at <b>54h 09m / 64h 00m (85%)</b> with only <b>0h 10m</b> left on <i>2.2 Detail Model</i> (45h 50m / 46h 00m); <b>3. Drafting (Fab)</b> is at <b>33h 07m / 40h 00m (83%, 6h 53m left)</b> while ClickUp To Do List still notes pending 3D/2D upgrades.</li>
+      <li><b>Team Weekly Manhours (02/11 to 08/11):</b> Engineering logged <b>262h 01m</b> (prev week 320h 49m): <b>194h 57m (74.4%)</b> on Project 2018 (82h 48m technical modules + 112h 09m Management) and <b>67h 04m (25.6%)</b> on other projects.</li>
+    </ul>
+  </div>
+
+  <!-- 6 KPI CARDS -->
+  <div class="grid g6">
+    <div class="card kpi-card">
+      <div class="kpi-lbl">Engineering Hours (Wk)</div>
+      <div class="kpi-val" style="color:var(--blue)">262h 01m</div>
+      <div class="kpi-sub">Prev week: 320h 49m (-58h 48m) &middot; 7/8 active staff</div>
+    </div>
+    <div class="card kpi-card k-amber">
+      <div class="kpi-lbl">On 2018 Rhodes Ridge</div>
+      <div class="kpi-val">194h 57m</div>
+      <div class="kpi-sub">74.4% of Eng time &middot; 82h 48m excl. Management</div>
+    </div>
+    <div class="card kpi-card k-purple">
+      <div class="kpi-lbl">Other Projects ([0001])</div>
+      <div class="kpi-val" style="color:var(--purple)">67h 04m</div>
+      <div class="kpi-sub">25.6% of Eng time (Lucas, Jayson, Quang, Marc)</div>
+    </div>
+    <div class="card kpi-card k-red">
+      <div class="kpi-lbl">30-02 Budget (TE)</div>
+      <div class="kpi-val" style="color:var(--red)">194h 43m <span style="font-size:14px;color:var(--sub)">/ 138h</span></div>
+      <div class="kpi-sub"><b>141.1% used (+56h 43m over)</b> &middot; 136h applicable</div>
+    </div>
+    <div class="card kpi-card k-red">
+      <div class="kpi-lbl">30-02 Calc Stage</div>
+      <div class="kpi-val" style="color:var(--red)">106h 59m <span style="font-size:14px;color:var(--sub)">/ 24h</span></div>
+      <div class="kpi-sub"><b>446% (+82h 59m over)</b> at 40% Structural progress</div>
+    </div>
+    <div class="card kpi-card k-green">
+      <div class="kpi-lbl">30-02 3D &amp; Fab Left</div>
+      <div class="kpi-val" style="color:var(--amber)">16h 44m</div>
+      <div class="kpi-sub">3D left: 9h 51m (Detail 0h 10m) &middot; Fab left: 6h 53m</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: VISUAL CHARTS (DONUT / PIE & BAR CHARTS) -->
+  <div class="tab-panel active" data-tab="charts">
+    <div class="grid g3">
+      <!-- Chart 1: 30-02 Budget Allocation Donut -->
+      <div class="card">
+        <h2>
+          <span>1A. 30-02 Budget Allocation (Donut)</span>
+          <span class="sub-hdr">Total TE: 138h 00m</span>
+        </h2>
+        <div class="donut-wrap">
+          <div class="donut-box">
+            <svg id="donut-budget" width="168" height="168" viewBox="-1 -1 2 2" style="transform:rotate(-90deg)"></svg>
+            <div class="donut-center">
+              <div class="dc-val">138h 00m</div>
+              <div class="dc-lbl">Total Budget<br>(136h Appl.)</div>
+            </div>
+          </div>
+          <div class="donut-leg" id="leg-budget"></div>
+        </div>
+        <div class="mut" style="margin-top:10px">
+          <b>46.4%</b> of module budget is allocated to <b>3D Model (64h)</b> and <b>29.0%</b> to <b>Drafting (40h)</b>, while <b>Engineering Calculation</b> was budgeted at only <b>17.4% (24h)</b>.
+        </div>
+      </div>
+
+      <!-- Chart 2: 30-02 Actual Cumulative Spend Donut -->
+      <div class="card">
+        <h2>
+          <span>1B. 30-02 Actual Hours Spent (Donut)</span>
+          <span class="sub-hdr">Cum. Actual: 194h 43m</span>
+        </h2>
+        <div class="donut-wrap">
+          <div class="donut-box">
+            <svg id="donut-actual" width="168" height="168" viewBox="-1 -1 2 2" style="transform:rotate(-90deg)"></svg>
+            <div class="donut-center">
+              <div class="dc-val" style="color:var(--red)">194h 43m</div>
+              <div class="dc-lbl">141.1% Used<br>(+56h 43m)</div>
+            </div>
+          </div>
+          <div class="donut-leg" id="leg-actual"></div>
+        </div>
+        <div class="mut" style="margin-top:10px">
+          <b>Engineering Calculation</b> accounts for <b>54.9% (106h 59m)</b> of all hours spent on 30-02, more than 3D Model (27.8%) and Drafting (17.0%) combined.
+        </div>
+      </div>
+
+      <!-- Chart 3: Weekly Team Hours Split Donut -->
+      <div class="card">
+        <h2>
+          <span>1C. Weekly Engineering Split (02-08/11)</span>
+          <span class="sub-hdr">Total Eng: 262h 01m</span>
+        </h2>
+        <div class="donut-wrap">
+          <div class="donut-box">
+            <svg id="donut-week" width="168" height="168" viewBox="-1 -1 2 2" style="transform:rotate(-90deg)"></svg>
+            <div class="donut-center">
+              <div class="dc-val" style="color:var(--blue)">262h 01m</div>
+              <div class="dc-lbl">Engineering<br>This Week</div>
+            </div>
+          </div>
+          <div class="donut-leg" id="leg-week"></div>
+        </div>
+        <div class="mut" style="margin-top:10px">
+          <b>31.6% (82h 48m)</b> went to 2018 technical modules (30-02 took 38h 50m), <b>42.8% (112h 09m)</b> to 2018 Management, and <b>25.6% (67h 04m)</b> to other projects.
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparative Bar Charts: 30-02 Stage Budget vs Actual & Area 30 Modules -->
+    <div class="grid g-7-5">
+      <div class="card">
+        <h2>
+          <span>1D. 30-02 Stage-by-Stage: Budget (Time Estimate) vs Cumulative Actual</span>
+          <span class="sub-hdr">Scale max: 110h &middot; Grey = Budget, Colored = Actual</span>
+        </h2>
+        <div id="stage-bars"></div>
+      </div>
+
+      <div class="card">
+        <h2>
+          <span>1E. Area 30 Modules with ClickUp Budget (Time Estimate)</span>
+          <span class="sub-hdr">6 of 22 Area 30 modules fully estimated</span>
+        </h2>
+        <div id="area30-bars"></div>
+        <div class="alert-card blu" style="margin-top:12px">
+          <b>Unbudgeted Active Modules Warning:</b> Five modules outside Area 30 have high cumulative hours in ClickUp without a Time Estimate: <b>70-03</b> (105h 45m), <b>60-68</b> (80h 17m), <b>60-13</b> (76h 27m), <b>60-12</b> (13h 29m), and <b>70-14</b> (12h 56m). Modules <b>30-07 to 30-22</b> only have 2h 00m on <i>1. Research</i>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 30-02 DETAILED BUDGET TABLE & DECISIONS -->
+  <div class="tab-panel active" data-tab="b3002">
+    <div class="card" style="margin-bottom:14px">
+      <h2>
+        <span>2. Module 30-02 (Screen Main Structure - Modification): Budget vs Actual Breakdown by Stage &amp; Task</span>
+        <span class="sub-hdr">Source: ClickUp Time Estimate &amp; Time Tracked API (12/11/2026 10:39 AWST)</span>
+      </h2>
+      <div class="filters">
+        <span class="grp-label">Filter by Budget Status:</span>
+        <button class="flt active" data-t="stg" data-v="all">All Stages (8)</button>
+        <button class="flt" data-t="stg" data-v="over">Over Budget (&gt;100%)</button>
+        <button class="flt" data-t="stg" data-v="near">Near Limit (80-100%)</button>
+        <button class="flt" data-t="stg" data-v="within">Within Budget (&lt;80%)</button>
+        <button class="flt" data-t="stg" data-v="na">N/A Stage</button>
+        <span class="count-tag" id="stgCnt"></span>
+      </div>
+      <table id="stgTbl">
+        <thead>
+          <tr>
+            <th style="width:210px">Stage / Sub-stage</th>
+            <th style="width:115px">ClickUp Progress</th>
+            <th class="r" style="width:90px">Budget (TE)</th>
+            <th class="r" style="width:80px">This Wk</th>
+            <th class="r" style="width:80px">Prev Wk</th>
+            <th class="r" style="width:95px">Cum. Actual</th>
+            <th class="r" style="width:110px">Variance</th>
+            <th style="width:185px">Utilization &amp; Status</th>
+            <th>Tasks &amp; Cumulative Hours Tracked in ClickUp</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-bstat="na">
+            <td><b>1. Research</b></td>
+            <td><span class="badge b-na">N/A</span></td>
+            <td class="r"><b>2h 00m</b></td>
+            <td class="r">0h</td>
+            <td class="r mut">0h</td>
+            <td class="r"><b>0h</b></td>
+            <td class="r" style="color:var(--sub)">-2h 00m</td>
+            <td><span class="mini-prog"><i style="width:0%;background:var(--grey)"></i></span><span class="badge b-na">N/A (Unused)</span></td>
+            <td><span class="mut">Marked N/A in ClickUp; included in Module Information 138h 00m summary total.</span></td>
+          </tr>
+          <tr data-bstat="near" style="background:#fcfcfd">
+            <td><b>2. 3D Model (Stage Total)</b></td>
+            <td><span class="badge b-ok">100% (Appl.)</span></td>
+            <td class="r"><b>64h 00m</b></td>
+            <td class="r">0h</td>
+            <td class="r mut">2h 02m</td>
+            <td class="r"><b>54h 09m</b></td>
+            <td class="r" style="color:var(--green)">-9h 51m left</td>
+            <td><span class="mini-prog"><i style="width:84.6%;background:var(--amber)"></i></span><span class="badge b-watch">84.6% Used</span></td>
+            <td>Sum of 3 sub-stages below: Design Layout (10h), Detail Model (46h), Model Prep (8h).</td>
+          </tr>
+          <tr data-bstat="near">
+            <td style="padding-left:24px">&bull; 2.1 Design Layout</td>
+            <td>100%</td>
+            <td class="r">10h 00m</td>
+            <td class="r">0h</td>
+            <td class="r mut">0h</td>
+            <td class="r">8h 19m</td>
+            <td class="r" style="color:var(--green)">-1h 41m left</td>
+            <td><span class="mini-prog"><i style="width:83.2%;background:var(--amber)"></i></span><span class="badge b-watch">83.2%</span></td>
+            <td><i>Update aircon support structer</i>: <b>8h 19m</b> cum. (complete).</td>
+          </tr>
+          <tr data-bstat="near">
+            <td style="padding-left:24px">&bull; 2.2 Detail Model</td>
+            <td>100%</td>
+            <td class="r">46h 00m</td>
+            <td class="r">0h</td>
+            <td class="r mut">2h 02m</td>
+            <td class="r">45h 50m</td>
+            <td class="r" style="color:var(--amber)"><b>-0h 10m left</b></td>
+            <td><span class="mini-prog"><i style="width:99.6%;background:var(--amber)"></i></span><span class="badge b-watch">99.6% (Cap)</span></td>
+            <td><i>Access for take-up pulley bolts</i> <b>17h 28m</b> (Marc 2h 02m prev wk, status <code>to do</code>) &middot; <i>Interface 180deg rotation</i> <b>15h 32m</b> &middot; <i>Comparison 2010 vs 2018</i> <b>12h 48m</b> &middot; Parent <b>0h 02m</b>.</td>
+          </tr>
+          <tr data-bstat="within">
+            <td style="padding-left:24px">&bull; 2.3 Model Prep</td>
+            <td>100%</td>
+            <td class="r">8h 00m</td>
+            <td class="r">0h</td>
+            <td class="r mut">0h</td>
+            <td class="r">0h</td>
+            <td class="r" style="color:var(--green)">-8h 00m left</td>
+            <td><span class="mini-prog"><i style="width:0%;background:var(--green)"></i></span><span class="badge b-ok">0% Used</span></td>
+            <td><span class="mut">0h tracked on Model Prep task.</span></td>
+          </tr>
+          <tr data-bstat="near">
+            <td><b>3. Drafting (Fab Drawing)</b></td>
+            <td><span class="badge b-ok">100% (Appl.)</span></td>
+            <td class="r"><b>40h 00m</b></td>
+            <td class="r"><b>22h 17m</b></td>
+            <td class="r mut">1h 34m</td>
+            <td class="r"><b>33h 07m</b></td>
+            <td class="r" style="color:var(--green)">-6h 53m left</td>
+            <td><span class="mini-prog"><i style="width:82.8%;background:var(--amber)"></i></span><span class="badge b-watch">82.8% Used</span></td>
+            <td><i>Check 2010-30-02 &amp; mark-up</i> <b>13h 45m</b> (Marc 12h 10m this wk, 1h 34m prev wk) &middot; <i>Update 2D drawings</i> <b>10h 08m</b> (Marc 10h 07m this wk) &middot; <i>Backdrafting 180deg</i> <b>9h 15m</b>. <i>(Mechanical Drawing: N/A, 0h)</i>.</td>
+          </tr>
+          <tr data-bstat="over">
+            <td><b>4. Engineering Calculation</b></td>
+            <td><span class="badge b-risk">40% (Struct.)</span></td>
+            <td class="r"><b>24h 00m</b></td>
+            <td class="r"><b>16h 33m</b></td>
+            <td class="r mut">22h 40m</td>
+            <td class="r" style="color:var(--red)"><b>106h 59m</b></td>
+            <td class="r" style="color:var(--red)"><b>+82h 59m OVER</b></td>
+            <td><span class="mini-prog"><i style="width:100%;background:var(--red)"></i></span><span class="badge b-risk">445.8% OVER</span></td>
+            <td><i>Load &amp; Structural Analysis</i> <b>67h 46m</b> (open) &middot; <i>Loading Analysis for Screening area</i> <b>27h 01m</b> (Christopher 4h 21m this wk, 22h 40m prev wk, open) &middot; <i>STAAD Inputs</i> <b>12h 12m</b> (Christopher 12h 12m this wk, complete).</td>
+          </tr>
+          <tr data-bstat="within">
+            <td><b>5. Documentation</b></td>
+            <td><span class="badge b-ok">100% (Appl.)</span></td>
+            <td class="r"><b>8h 00m</b></td>
+            <td class="r">0h</td>
+            <td class="r mut">0h 28m</td>
+            <td class="r"><b>0h 28m</b></td>
+            <td class="r" style="color:var(--green)">-7h 32m left</td>
+            <td><span class="mini-prog"><i style="width:5.8%;background:var(--green)"></i></span><span class="badge b-ok">5.8% Used</span></td>
+            <td><i>Generate report detailing changes vs 2010 version</i>: <b>0h 28m</b> cum. (Marc 0h 28m prev wk, open).</td>
+          </tr>
+          <tr class="tot-row" data-bstat="total">
+            <td>TOTAL 30-02 (Module Info)</td>
+            <td>86.7% Overall</td>
+            <td class="r">138h 00m</td>
+            <td class="r">38h 50m</td>
+            <td class="r">26h 44m</td>
+            <td class="r" style="color:var(--red)">194h 43m</td>
+            <td class="r" style="color:var(--red)">+56h 43m OVER</td>
+            <td><span class="badge b-risk">141.1% (143.2% Appl.)</span></td>
+            <td><b>136h 00m applicable budget</b> (excl. 2h N/A Research) &rarr; <b>+58h 43m over applicable budget</b>. Week 02-08/11 alone consumed 28.1% of total module budget.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>
+        <span>Actionable Budget Findings &amp; Recommended Decisions for Quang Ha</span>
+        <span class="badge b-watch">3 Decisions Needed</span>
+      </h2>
+      <div class="alert-card red">
+        <b>1. Revise Estimate or Cap Hours on 30-02 Engineering Calculation (Christopher Titular):</b> Stage 4 has spent <b>106h 59m against a 24h 00m budget (446%, +82h 59m over)</b> while Structural progress is at <b>40%</b>. Two tasks remain open (<i>Load &amp; Structural Analysis</i> 67h 46m and <i>Loading Analysis for Screening area</i> 27h 01m). <b>Proposed:</b> Review remaining calculation scope with Christopher and either update the ClickUp Time Estimate to reflect full structural reanalysis or cap further hours.
+      </div>
+      <div class="alert-card amb">
+        <b>2. Monitor 30-02 Detail Model &amp; Fab Drawing Remaining Buffer (Marc Aldrin Juanite):</b> ClickUp marks 3D Model and Fab Drawing at 100%, but the <i>To Do List</i> still lists pending 3D model upgrades for the new CV03/CV04 take-up pulley and corresponding 2D fabrication drawing updates. Remaining budget is only <b>0h 10m</b> on <i>Detail Model</i> (or 9h 51m across 3D Model) and <b>6h 53m</b> on <i>Fab Drawing</i>.
+      </div>
+      <div class="alert-card blu">
+        <b>3. Populate Missing Time Estimates on High-Spend Modules:</b> Five active modules have significant cumulative hours tracked in ClickUp but no Time Estimate: <b>70-03</b> (105h 45m), <b>60-68</b> (80h 17m), <b>60-13</b> (76h 27m), <b>60-12</b> (13h 29m), <b>70-14</b> (12h 56m), plus <b>30-22</b> (only 2h on Research, 3h 01m spent).
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: MANHOURS BY 2018 MODULE -->
+  <div class="tab-panel active" data-tab="mods">
+    <div class="card">
+      <h2>
+        <span>3. Weekly Manhours by 2018 Module (ClickUp List: 02/11 to 08/11/2026)</span>
+        <span class="sub-hdr">Total 2018: 194h 57m (82h 48m technical modules + 112h 09m Management)</span>
+      </h2>
+      <div class="filters">
+        <span class="grp-label">Activity:</span>
+        <button class="flt active" data-t="modAct" data-v="all">All Modules (21)</button>
+        <button class="flt" data-t="modAct" data-v="active-wk">Active This Week (&gt;0h)</button>
+        <button class="flt" data-t="modAct" data-v="idle-wk">0h This Week (Active Prev Wk)</button>
+        <span class="grp-label" style="margin-left:10px">Area:</span>
+        <button class="flt active" data-t="modArea" data-v="all">All Areas</button>
+        <button class="flt" data-t="modArea" data-v="Area 20">Area 20</button>
+        <button class="flt" data-t="modArea" data-v="Area 30">Area 30</button>
+        <button class="flt" data-t="modArea" data-v="Area 60">Area 60</button>
+        <button class="flt" data-t="modArea" data-v="Area 70">Area 70</button>
+        <button class="flt" data-t="modArea" data-v="General">General</button>
+        <span class="count-tag" id="modCnt"></span>
+      </div>
+      <table id="modTbl">
+        <thead>
+          <tr>
+            <th>2018 Module (ClickUp List)</th>
+            <th style="width:90px">Area</th>
+            <th class="r" style="width:95px">This Week</th>
+            <th class="r" style="width:95px">Prev Week</th>
+            <th class="r" style="width:105px">Change</th>
+            <th>ClickUp Budget (Time Estimate) &amp; Cumulative Status</th>
+            <th style="width:260px">Staff Logged This Week</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-act="active-wk" data-area="Area 30">
+            <td class="mono">30-02-Screen Main Structure - Modification</td>
+            <td><span class="badge b-blue">Area 30</span></td>
+            <td class="r"><b>38h 50m</b></td>
+            <td class="r mut">26h 44m</td>
+            <td class="r"><span class="badge b-ok">+12h 06m</span></td>
+            <td><b>138h 00m Budget</b> &middot; <span class="badge b-risk">Cum. 194h 43m (141.1%)</span><div class="mut">+56h 43m over total (136h applicable; 86.7% progress)</div></td>
+            <td>Marc 22h 17m, Christopher 16h 33m</td>
+          </tr>
+          <tr data-act="active-wk" data-area="Area 60">
+            <td class="mono">60-12-1500 Belt Feeder</td>
+            <td><span class="badge b-na">Area 60</span></td>
+            <td class="r"><b>11h 40m</b></td>
+            <td class="r mut">0h</td>
+            <td class="r"><span class="badge b-ok">+11h 40m</span></td>
+            <td><span class="badge b-watch">No TE yet</span> &middot; Cum. <b>13h 29m</b> tracked in ClickUp</td>
+            <td>Maverick 11h 40m</td>
+          </tr>
+          <tr data-act="active-wk" data-area="Area 60">
+            <td class="mono">60-13-1200 Belt Feeder</td>
+            <td><span class="badge b-na">Area 60</span></td>
+            <td class="r"><b>10h 23m</b></td>
+            <td class="r mut">4h 20m</td>
+            <td class="r"><span class="badge b-ok">+6h 03m</span></td>
+            <td><span class="badge b-watch">No TE yet</span> &middot; Cum. <b>76h 27m</b> tracked in ClickUp</td>
+            <td>Maverick 10h 23m</td>
+          </tr>
+          <tr data-act="active-wk" data-area="Area 60">
+            <td class="mono">60-68-Belt Clamp (STD)</td>
+            <td><span class="badge b-na">Area 60</span></td>
+            <td class="r"><b>7h 37m</b></td>
+            <td class="r mut">32h 07m</td>
+            <td class="r"><span class="badge b-risk">-24h 30m</span></td>
+            <td><span class="badge b-watch">No TE yet</span> &middot; Cum. <b>80h 17m</b> tracked in ClickUp</td>
+            <td>Maverick 7h 37m</td>
+          </tr>
+          <tr data-act="active-wk" data-area="Area 70">
+            <td class="mono">70-14-Crusher MCC 01</td>
+            <td><span class="badge b-na">Area 70</span></td>
+            <td class="r"><b>6h 43m</b></td>
+            <td class="r mut">0h</td>
+            <td class="r"><span class="badge b-ok">+6h 43m</span></td>
+            <td><span class="badge b-watch">No TE yet</span> &middot; Cum. <b>12h 56m</b> tracked in ClickUp</td>
+            <td>Maverick 6h 43m</td>
+          </tr>
+          <tr data-act="active-wk" data-area="Area 70">
+            <td class="mono">70-03-Screen Station Equipment</td>
+            <td><span class="badge b-na">Area 70</span></td>
+            <td class="r"><b>4h 26m</b></td>
+            <td class="r mut">0h</td>
+            <td class="r"><span class="badge b-ok">+4h 26m</span></td>
+            <td><span class="badge b-risk">No TE yet</span> &middot; Cum. <b>105h 45m</b> tracked in ClickUp</td>
+            <td>Maverick 4h 26m</td>
+          </tr>
+          <tr data-act="active-wk" data-area="Area 30">
+            <td class="mono">30-22-Water Pipeline - System</td>
+            <td><span class="badge b-blue">Area 30</span></td>
+            <td class="r"><b>3h 02m</b></td>
+            <td class="r mut">0h</td>
+            <td class="r"><span class="badge b-ok">+3h 02m</span></td>
+            <td><b>Partial TE (2h 00m on 1. Research)</b> &middot; Cum. <b>3h 01m</b> tracked</td>
+            <td>Marc 3h 02m</td>
+          </tr>
+          <tr data-act="active-wk" data-area="General">
+            <td class="mono">Management</td>
+            <td><span class="badge b-na">General</span></td>
+            <td class="r"><b>112h 09m</b></td>
+            <td class="r mut">161h 41m</td>
+            <td class="r"><span class="badge b-risk">-49h 32m</span></td>
+            <td><span class="mut">No Time Estimate (General management list)</span></td>
+            <td>Sam 45h 00m, Quang 32h 02m, Jayson 28h 41m, Lucas 6h 26m</td>
+          </tr>
+          <tr data-act="active-wk" data-area="General">
+            <td class="mono">Conceptual Design</td>
+            <td><span class="badge b-na">General</span></td>
+            <td class="r"><b>0h 07m</b></td>
+            <td class="r mut">3h 06m</td>
+            <td class="r"><span class="badge b-risk">-2h 59m</span></td>
+            <td><span class="mut">No Time Estimate</span></td>
+            <td>Lucas 0h 07m</td>
+          </tr>
+          <tr data-act="idle-wk" data-area="General">
+            <td class="mono">00-01-Concrete</td>
+            <td><span class="badge b-na">General</span></td>
+            <td class="r">0h</td>
+            <td class="r mut">5h 15m</td>
+            <td class="r"><span class="badge b-na">-5h 15m</span></td>
+            <td><span class="mut">No data</span></td>
+            <td><span class="mut">0h this week</span></td>
+          </tr>
+          <tr data-act="idle-wk" data-area="Area 20">
+            <td class="mono">20-01-Crushing Structure (Main Frame)</td>
+            <td><span class="badge b-na">Area 20</span></td>
+            <td class="r">0h</td>
+            <td class="r mut">12h 46m</td>
+            <td class="r"><span class="badge b-na">-12h 46m</span></td>
+            <td><span class="mut">Partial TE (2h 00m on 1. Research only)</span></td>
+            <td><span class="mut">0h this week</span></td>
+          </tr>
+          <tr data-act="idle-wk" data-area="Area 60">
+            <td class="mono">60-08-CV01 Truss</td>
+            <td><span class="badge b-na">Area 60</span></td>
+            <td class="r">0h</td>
+            <td class="r mut">5h 28m</td>
+            <td class="r"><span class="badge b-na">-5h 28m</span></td>
+            <td><span class="mut">No data</span></td>
+            <td><span class="mut">0h this week</span></td>
+          </tr>
+          <tr data-act="idle-wk" data-area="Area 60">
+            <td class="mono">60-28-CV03 &amp; CV04 Tail Structure - Take-up</td>
+            <td><span class="badge b-na">Area 60</span></td>
+            <td class="r">0h</td>
+            <td class="r mut">13h 51m</td>
+            <td class="r"><span class="badge b-na">-13h 51m</span></td>
+            <td><span class="mut">No data</span></td>
+            <td><span class="mut">0h this week</span></td>
+          </tr>
+          <tr data-act="idle-wk" data-area="Area 60">
+            <td class="mono">60-36-CV05 Transfer Station</td>
+            <td><span class="badge b-na">Area 60</span></td>
+            <td class="r">0h</td>
+            <td class="r mut">8h 36m</td>
+            <td class="r"><span class="badge b-na">-8h 36m</span></td>
+            <td><span class="mut">No data</span></td>
+            <td><span class="mut">0h this week</span></td>
+          </tr>
+          <tr data-act="idle-wk" data-area="Area 60">
+            <td class="mono">60-40-Conveyor CV01 Mechanical</td>
+            <td><span class="badge b-na">Area 60</span></td>
+            <td class="r">0h</td>
+            <td class="r mut">3h 46m</td>
+            <td class="r"><span class="badge b-na">-3h 46m</span></td>
+            <td><span class="mut">No data</span></td>
+            <td><span class="mut">0h this week</span></td>
+          </tr>
+          <tr data-act="idle-wk" data-area="Area 60">
+            <td class="mono">60-42-Conveyor CV03 &amp; CV04 Mechanical</td>
+            <td><span class="badge b-na">Area 60</span></td>
+            <td class="r">0h</td>
+            <td class="r mut">7h 11m</td>
+            <td class="r"><span class="badge b-na">-7h 11m</span></td>
+            <td><span class="mut">No data</span></td>
+            <td><span class="mut">0h this week</span></td>
+          </tr>
+          <tr data-act="idle-wk" data-area="Area 60">
+            <td class="mono">60-56-CV02 Rock Shed</td>
+            <td><span class="badge b-na">Area 60</span></td>
+            <td class="r">0h</td>
+            <td class="r mut">8h 10m</td>
+            <td class="r"><span class="badge b-na">-8h 10m</span></td>
+            <td><span class="mut">No data</span></td>
+            <td><span class="mut">0h this week</span></td>
+          </tr>
+          <tr data-act="idle-wk" data-area="Area 60">
+            <td class="mono">60-59-CV08 18T Surge Bin</td>
+            <td><span class="badge b-na">Area 60</span></td>
+            <td class="r">0h</td>
+            <td class="r mut">8h 05m</td>
+            <td class="r"><span class="badge b-na">-8h 05m</span></td>
+            <td><span class="mut">No data</span></td>
+            <td><span class="mut">0h this week</span></td>
+          </tr>
+          <tr data-act="idle-wk" data-area="Area 60">
+            <td class="mono">60-63-Belt Feeder 05 &amp; 06 Mechanical</td>
+            <td><span class="badge b-na">Area 60</span></td>
+            <td class="r">0h</td>
+            <td class="r mut">8h 06m</td>
+            <td class="r"><span class="badge b-na">-8h 06m</span></td>
+            <td><span class="mut">No data</span></td>
+            <td><span class="mut">0h this week</span></td>
+          </tr>
+          <tr data-act="idle-wk" data-area="Area 60">
+            <td class="mono">60-64-Belt Feeder 01, 02, 03, 04 Mechanical</td>
+            <td><span class="badge b-na">Area 60</span></td>
+            <td class="r">0h</td>
+            <td class="r mut">8h 03m</td>
+            <td class="r"><span class="badge b-na">-8h 03m</span></td>
+            <td><span class="mut">No data</span></td>
+            <td><span class="mut">0h this week</span></td>
+          </tr>
+          <tr data-act="idle-wk" data-area="Area 70">
+            <td class="mono">70-02-Crushing Structure Electrical Conduit</td>
+            <td><span class="badge b-na">Area 70</span></td>
+            <td class="r">0h</td>
+            <td class="r mut">0h 31m</td>
+            <td class="r"><span class="badge b-na">-0h 31m</span></td>
+            <td><span class="mut">No data</span></td>
+            <td><span class="mut">0h this week</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION 4: STAFF MANHOURS CHART & TABLE -->
+  <div class="tab-panel active" data-tab="staff">
+    <div class="card" style="margin-bottom:14px">
+      <h2>
+        <span>4A. Weekly Staff Hours Visual Comparison (Mon 02/11 to Sun 08/11/2026)</span>
+        <span class="sub-hdr">Blue = Project 2018 &middot; Purple = Other Projects ([0001]) &middot; Green = Admin &middot; Red dashed line = 40h benchmark</span>
+      </h2>
+      <div id="staff-bars"></div>
+    </div>
+
+    <div class="card">
+      <h2>
+        <span>4B. Individual Staff Manhours Breakdown (02/11 to 08/11/2026)</span>
+        <span class="sub-hdr">Source: Operations Staff Weekly Timesheet PDF</span>
+      </h2>
+      <div class="filters">
+        <span class="grp-label">Department:</span>
+        <button class="flt active" data-t="dept" data-v="all">All Staff (13)</button>
+        <button class="flt" data-t="dept" data-v="Engineering">Engineering (8)</button>
+        <button class="flt" data-t="dept" data-v="Administration">Administration (5)</button>
+        <span class="count-tag" id="deptCnt"></span>
+      </div>
+      <table id="staffTbl">
+        <thead>
+          <tr>
+            <th>Staff Member</th>
+            <th style="width:110px">Department</th>
+            <th class="r" style="width:85px">Total Wk</th>
+            <th class="r" style="width:80px">% of 40h</th>
+            <th class="r" style="width:85px">Prev Wk</th>
+            <th class="r" style="width:85px">On 2018</th>
+            <th class="r" style="width:95px">Other Proj.</th>
+            <th>Daily Breakdown (Mon to Sat)</th>
+            <th>ClickUp Timesheet Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-dept="Engineering">
+            <td><b>Sam Phan</b></td>
+            <td>Engineering</td>
+            <td class="r"><b>45h 00m</b></td>
+            <td class="r"><span class="badge b-ok">112%</span></td>
+            <td class="r mut">45h 00m</td>
+            <td class="r"><b>45h 00m</b></td>
+            <td class="r mut">0h</td>
+            <td class="mut">Mon 8h00 | Tue 8h00 | Wed 8h00 | Thu 8h00 | Fri 8h00 | Sat 5h00</td>
+            <td>Logged 45h 00m on [2018] Management (includes 5h Saturday).</td>
+          </tr>
+          <tr data-dept="Engineering">
+            <td><b>Quang Ha</b></td>
+            <td>Engineering</td>
+            <td class="r"><b>43h 48m</b></td>
+            <td class="r"><span class="badge b-ok">110%</span></td>
+            <td class="r mut">46h 05m</td>
+            <td class="r"><b>32h 02m</b></td>
+            <td class="r">11h 46m</td>
+            <td class="mut">Mon 9h41 | Tue 8h25 | Wed 7h11 | Thu 9h43 | Fri 8h48</td>
+            <td>Back-dated 5h 15m for 3 Nov (added 4 Nov by Zyra Fernandez) excluded by ClickUp. 11h 46m on [0001].</td>
+          </tr>
+          <tr data-dept="Engineering">
+            <td><b>Jayson Perez</b></td>
+            <td>Engineering</td>
+            <td class="r"><b>42h 19m</b></td>
+            <td class="r"><span class="badge b-ok">106%</span></td>
+            <td class="r mut">43h 03m</td>
+            <td class="r"><b>28h 41m</b></td>
+            <td class="r">13h 38m</td>
+            <td class="mut">Mon 9h10 | Tue 8h21 | Wed 8h20 | Thu 8h14 | Fri 8h14</td>
+            <td>3 Nov &amp; 4 Nov entries moved on 5 Nov to [0001] tasks; counted at cut-off values.</td>
+          </tr>
+          <tr data-dept="Engineering">
+            <td><b>Maverick Gordola</b></td>
+            <td>Engineering</td>
+            <td class="r"><b>40h 49m</b></td>
+            <td class="r"><span class="badge b-ok">102%</span></td>
+            <td class="r mut">36h 27m</td>
+            <td class="r"><b>40h 49m</b></td>
+            <td class="r mut">0h</td>
+            <td class="mut">Mon 7h37 | Tue 8h14 | Wed 8h39 | Thu 8h00 | Fri 8h19</td>
+            <td>100% dedicated to 2018 technical modules (60-12, 60-13, 60-68, 70-14, 70-03).</td>
+          </tr>
+          <tr data-dept="Engineering">
+            <td><b>Lucas Pham</b></td>
+            <td>Engineering</td>
+            <td class="r"><b>39h 28m</b></td>
+            <td class="r"><span class="badge b-ok">99%</span></td>
+            <td class="r mut">42h 56m</td>
+            <td class="r"><b>6h 33m</b></td>
+            <td class="r">32h 55m</td>
+            <td class="mut">Mon 3h54 | Tue 8h25 | Wed 8h35 | Thu 9h03 | Fri 9h31</td>
+            <td>Back-dated 5h 10m for 2 Nov (added 3 Nov by Zyra) excluded. 32h 55m on [0001] projects.</td>
+          </tr>
+          <tr data-dept="Engineering">
+            <td><b>Marc Aldrin Juanite</b></td>
+            <td>Engineering</td>
+            <td class="r"><b>34h 04m</b></td>
+            <td class="r"><span class="badge b-watch">85%</span></td>
+            <td class="r mut">41h 15m</td>
+            <td class="r"><b>25h 19m</b></td>
+            <td class="r">8h 45m</td>
+            <td class="mut">Mon 0h | Tue 8h20 | Wed 8h37 | Thu 8h32 | Fri 8h35</td>
+            <td>No time entries on Mon 2 Nov. Logged 22h 17m on 30-02 Fab Drawing and 3h 02m on 30-22.</td>
+          </tr>
+          <tr data-dept="Engineering">
+            <td><b>Christopher Titular</b></td>
+            <td>Engineering</td>
+            <td class="r"><b>16h 33m</b></td>
+            <td class="r"><span class="badge b-leave">41% (Leave)</span></td>
+            <td class="r mut">41h 12m</td>
+            <td class="r"><b>16h 33m</b></td>
+            <td class="r mut">0h</td>
+            <td class="mut">Mon 8h27 | Tue 8h06 | Wed 0h | Thu 0h | Fri 0h</td>
+            <td>On holiday leave from Wed 4 Nov until 10 Nov. Logged 16h 33m on 30-02 Calculations.</td>
+          </tr>
+          <tr data-dept="Engineering">
+            <td><b>Dechen Choden</b></td>
+            <td>Engineering</td>
+            <td class="r">0h</td>
+            <td class="r"><span class="badge b-leave">0%</span></td>
+            <td class="r mut">0h</td>
+            <td class="r mut">0h</td>
+            <td class="r mut">0h</td>
+            <td class="mut">Mon 0h | Tue 0h | Wed 0h | Thu 0h | Fri 0h</td>
+            <td>On maternity leave.</td>
+          </tr>
+          <tr data-dept="Administration">
+            <td><b>Aljon David Santos</b></td>
+            <td>Administration</td>
+            <td class="r"><b>41h 16m</b></td>
+            <td class="r"><span class="badge b-ok">103%</span></td>
+            <td class="r mut">46h 30m</td>
+            <td class="r mut">0h</td>
+            <td class="r mut">0h</td>
+            <td class="mut">Mon 8h02 | Tue 8h14 | Wed 8h18 | Thu 8h43 | Fri 7h59</td>
+            <td>IT Department support.</td>
+          </tr>
+          <tr data-dept="Administration">
+            <td><b>Xuan Thu Tran</b></td>
+            <td>Administration</td>
+            <td class="r"><b>36h 48m</b></td>
+            <td class="r"><span class="badge b-ok">92%</span></td>
+            <td class="r mut">33h 07m</td>
+            <td class="r mut">0h</td>
+            <td class="r mut">0h</td>
+            <td class="mut">Mon 8h02 | Tue 8h01 | Wed 4h07 | Thu 8h19 | Fri 8h19</td>
+            <td>Wed 4 Nov morning shift only (4h 07m).</td>
+          </tr>
+          <tr data-dept="Administration">
+            <td><b>Van Nghiem</b></td>
+            <td>Administration</td>
+            <td class="r"><b>24h 26m</b></td>
+            <td class="r"><span class="badge b-na">61% (PT)</span></td>
+            <td class="r mut">24h 54m</td>
+            <td class="r mut">0h</td>
+            <td class="r mut">0h</td>
+            <td class="mut">Mon 8h01 | Tue 8h23 | Wed 8h02 | Thu 0h | Fri 0h</td>
+            <td>Part-time schedule (works Mon to Wed).</td>
+          </tr>
+          <tr data-dept="Administration">
+            <td><b>Zyra Fernandez</b></td>
+            <td>Administration</td>
+            <td class="r"><b>23h 13m</b></td>
+            <td class="r"><span class="badge b-watch">58%</span></td>
+            <td class="r mut">21h 35m</td>
+            <td class="r mut">0h</td>
+            <td class="r mut">0h</td>
+            <td class="mut">Mon 5h25 | Tue 5h02 | Wed 4h26 | Thu 4h09 | Fri 4h11</td>
+            <td>Under 7h every working day (no afternoon entries).</td>
+          </tr>
+          <tr data-dept="Administration">
+            <td><b>Chloe Pham</b></td>
+            <td>Administration</td>
+            <td class="r">0h</td>
+            <td class="r"><span class="badge b-na">0%</span></td>
+            <td class="r mut">0h</td>
+            <td class="r mut">0h</td>
+            <td class="r mut">0h</td>
+            <td class="mut">Mon 0h | Tue 0h | Wed 0h | Thu 0h | Fri 0h</td>
+            <td>No activity logged.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    <b>Sources &amp; Rules:</b> ClickUp Operations Staff Weekly Timesheet PDFs (02/11 to 08/11/2026 and 26/10 to 31/10/2026); ClickUp Area 30 Tasks &amp; Time Estimate API read on 12/11/2026 at 10:39 AWST.<br>
+    <b>ClickUp Budget Rule:</b> Task <i>Module Information</i> holds the module summary Time Estimate (138h 00m for 30-02) and is not summed with child stages to avoid double-counting. Legacy timesheet stage path <code>4. Drafting</code> is merged into <code>3. Drafting</code>.
+  </footer>
+
+</div>
+
+<script>
+// 1. Helper to render SVG Donut Charts + Legend Table
+function renderDonut(svgId, legId, items, totalMins, unitLabel) {
+  var angle = 0;
+  var rOuter = 1, rInner = 0.62;
+  var svgHtml = "";
+  var legHtml = '<table><thead><tr><th>Category</th><th class="r">Hours</th><th class="r">Share</th></tr></thead><tbody>';
+
+  items.forEach(function(it) {
+    if (it.mins > 0) {
+      var frac = it.mins / totalMins;
+      var nextAngle = angle + frac * 2 * Math.PI;
+      if (frac >= 0.9999) {
+        svgHtml += '<circle cx="0" cy="0" r="0.81" fill="none" stroke="' + it.color + '" stroke-width="0.38"/>';
+      } else {
+        var x1 = Math.cos(angle) * rOuter, y1 = Math.sin(angle) * rOuter;
+        var x2 = Math.cos(nextAngle) * rOuter, y2 = Math.sin(nextAngle) * rOuter;
+        var x3 = Math.cos(nextAngle) * rInner, y3 = Math.sin(nextAngle) * rInner;
+        var x4 = Math.cos(angle) * rInner, y4 = Math.sin(angle) * rInner;
+        var largeArc = frac > 0.5 ? 1 : 0;
+        var d = [
+          "M", x1, y1,
+          "A", rOuter, rOuter, 0, largeArc, 1, x2, y2,
+          "L", x3, y3,
+          "A", rInner, rInner, 0, largeArc, 0, x4, y4,
+          "Z"
+        ].join(" ");
+        svgHtml += '<path d="' + d + '" fill="' + it.color + '" stroke="#ffffff" stroke-width="0.025"><title>' + it.label + ': ' + it.hrs + ' (' + (frac*100).toFixed(1) + '%)</title></path>';
+      }
+      angle = nextAngle;
+    }
+    var pct = (it.mins / totalMins * 100).toFixed(1) + "%";
+    legHtml += '<tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:' + it.color + ';margin-right:6px;vertical-align:middle"></span><b>' + it.label + '</b></td><td class="r">' + it.hrs + '</td><td class="r"><b>' + pct + '</b></td></tr>';
+  });
+  legHtml += '</tbody></table>';
+  document.getElementById(svgId).innerHTML = svgHtml;
+  document.getElementById(legId).innerHTML = legHtml;
+}
+
+// 1A: 30-02 Budget Allocation (138h = 8280m)
+renderDonut("donut-budget", "leg-budget", [
+  { label: "2. 3D Model", mins: 3840, hrs: "64h 00m", color: "#2563eb" },
+  { label: "3. Drafting (Fab)", mins: 2400, hrs: "40h 00m", color: "#059669" },
+  { label: "4. Eng. Calculation", mins: 1440, hrs: "24h 00m", color: "#d97706" },
+  { label: "5. Documentation", mins: 480, hrs: "8h 00m", color: "#7c3aed" },
+  { label: "1. Research (N/A)", mins: 120, hrs: "2h 00m", color: "#94a3b8" }
+], 8280);
+
+// 1B: 30-02 Actual Cumulative Spend (194h 43m = 11683m)
+renderDonut("donut-actual", "leg-actual", [
+  { label: "4. Eng. Calculation", mins: 6419, hrs: "106h 59m", color: "#dc2626" },
+  { label: "2. 3D Model", mins: 3249, hrs: "54h 09m", color: "#2563eb" },
+  { label: "3. Drafting (Fab)", mins: 1987, hrs: "33h 07m", color: "#059669" },
+  { label: "5. Documentation", mins: 28, hrs: "0h 28m", color: "#7c3aed" },
+  { label: "1. Research (N/A)", mins: 0, hrs: "0h 00m", color: "#94a3b8" }
+], 11683);
+
+// 1C: Weekly Engineering Split (262h 01m = 15721m)
+renderDonut("donut-week", "leg-week", [
+  { label: "2018 Management", mins: 6729, hrs: "112h 09m", color: "#3b82f6" },
+  { label: "2018 Technical Modules", mins: 4968, hrs: "82h 48m", color: "#059669" },
+  { label: "Other Projects ([0001])", mins: 4024, hrs: "67h 04m", color: "#7c3aed" }
+], 15721);
+
+// 1D: 30-02 Stage Comparative Bars (Budget vs Actual, scale max = 110h = 6600m)
+var stageData = [
+  { name: "4. Engineering Calculation", prog: "40% Struct.", bMins: 1440, bTxt: "24h 00m", aMins: 6419, aTxt: "106h 59m", pct: "446% (+82h 59m OVER)", col: "var(--red)", badge: "b-risk" },
+  { name: "2. 3D Model (Total)", prog: "100% Appl.", bMins: 3840, bTxt: "64h 00m", aMins: 3249, aTxt: "54h 09m", pct: "85% (9h 51m left)", col: "var(--amber)", badge: "b-watch" },
+  { name: "3. Drafting (Fab Drawing)", prog: "100% Appl.", bMins: 2400, bTxt: "40h 00m", aMins: 1987, aTxt: "33h 07m", pct: "83% (6h 53m left)", col: "var(--amber)", badge: "b-watch" },
+  { name: "5. Documentation", prog: "100% Appl.", bMins: 480, bTxt: "8h 00m", aMins: 28, aTxt: "0h 28m", pct: "6% (7h 32m left)", col: "var(--green)", badge: "b-ok" },
+  { name: "1. Research (N/A)", prog: "N/A", bMins: 120, bTxt: "2h 00m", aMins: 0, aTxt: "0h 00m", pct: "N/A (Excluded)", col: "var(--grey)", badge: "b-na" }
+];
+var maxStageMins = 6600;
+var stgBarsHtml = "";
+stageData.forEach(function(s) {
+  var bPct = (s.bMins / maxStageMins * 100).toFixed(1);
+  var aPct = (s.aMins / maxStageMins * 100).toFixed(1);
+  stgBarsHtml += '<div class="bchart-row">' +
+    '<div class="bchart-top"><span><b>' + s.name + '</b> <span class="mut">(' + s.prog + ')</span></span><span class="badge ' + s.badge + '">' + s.pct + '</span></div>' +
+    '<div class="bchart-dual"><span class="mut">Budget TE</span><div class="bchart-track"><div class="bchart-fill" style="width:' + bPct + '%;background:#94a3b8"></div></div><span style="text-align:right;font-weight:600;color:#475569">' + s.bTxt + '</span></div>' +
+    '<div class="bchart-dual"><span style="font-weight:600">Actual</span><div class="bchart-track"><div class="bchart-fill" style="width:' + aPct + '%;background:' + s.col + '"></div></div><span style="text-align:right;font-weight:800">' + s.aTxt + '</span></div>' +
+  '</div>';
+});
+document.getElementById("stage-bars").innerHTML = stgBarsHtml;
+
+// 1E: Area 30 Modules with Full ClickUp Time Estimate
+var area30Mods = [
+  { code: "30-02 Screen Main Structure", bMins: 8280, bTxt: "138h 00m", aMins: 11683, aTxt: "194h 43m (141%)", detail: "Res 2h, 3D 64h, Fab 40h, Calc 24h, Doc 8h", col: "var(--red)" },
+  { code: "30-05 CV02 Stringer", bMins: 5640, bTxt: "94h 00m", aMins: 0, aTxt: "0h tracked", detail: "Res 2h, 3D 48h, Fab 32h, Calc 8h, Doc 4h", col: "var(--blue)" },
+  { code: "30-06 CV08 Stringer", bMins: 5640, bTxt: "94h 00m", aMins: 0, aTxt: "0h tracked", detail: "Res 2h, 3D 48h, Fab 32h, Calc 8h, Doc 4h", col: "var(--blue)" },
+  { code: "30-04 Screen Hopper", bMins: 4800, bTxt: "80h 00m", aMins: 0, aTxt: "0h tracked", detail: "Res 2h, 3D 34h, Fab 24h, Calc 16h, Doc 4h", col: "var(--blue)" },
+  { code: "30-03 Screen Access Stairs", bMins: 2520, bTxt: "42h 00m", aMins: 0, aTxt: "0h tracked", detail: "Res 2h, 3D 20h, Fab 16h, Doc 4h", col: "var(--blue)" },
+  { code: "30-01 Screen Support Legs", bMins: 1200, bTxt: "20h 00m", aMins: 0, aTxt: "0h tracked", detail: "Res 2h, 3D 8h, Fab 8h, Doc 2h", col: "var(--blue)" }
+];
+var a30Html = '<table><thead><tr><th>Area 30 Module</th><th class="r">Budget (TE)</th><th class="r">Cum. Actual</th><th>Stage Breakdown</th></tr></thead><tbody>';
+area30Mods.forEach(function(m) {
+  a30Html += '<tr><td><b>' + m.code + '</b></td><td class="r"><b>' + m.bTxt + '</b></td><td class="r" style="color:' + (m.aMins > 0 ? 'var(--red);font-weight:700' : 'var(--sub)') + '">' + m.aTxt + '</td><td class="mut">' + m.detail + '</td></tr>';
+});
+a30Html += '</tbody></table>';
+document.getElementById("area30-bars").innerHTML = a30Html;
+
+// 4A: Staff Horizontal Stacked Bars (max 48h = 2880m)
+var staffList = [
+  { name: "Sam Phan (Eng)", m2018: 2700, mOther: 0, mAdmin: 0, txt: "45h 00m (112%)" },
+  { name: "Quang Ha (Eng)", m2018: 1922, mOther: 706, mAdmin: 0, txt: "43h 48m (110%)" },
+  { name: "Jayson Perez (Eng)", m2018: 1721, mOther: 818, mAdmin: 0, txt: "42h 19m (106%)" },
+  { name: "Aljon Santos (Admin)", m2018: 0, mOther: 0, mAdmin: 2476, txt: "41h 16m (103%)" },
+  { name: "Maverick G. (Eng)", m2018: 2449, mOther: 0, mAdmin: 0, txt: "40h 49m (102%)" },
+  { name: "Lucas Pham (Eng)", m2018: 393, mOther: 1975, mAdmin: 0, txt: "39h 28m (99%)" },
+  { name: "Xuan Thu Tran (Admin)", m2018: 0, mOther: 0, mAdmin: 2208, txt: "36h 48m (92%)" },
+  { name: "Marc Aldrin (Eng)", m2018: 1519, mOther: 525, mAdmin: 0, txt: "34h 04m (85%)" },
+  { name: "Van Nghiem (Admin PT)", m2018: 0, mOther: 0, mAdmin: 1466, txt: "24h 26m (61%)" },
+  { name: "Zyra F. (Admin)", m2018: 0, mOther: 0, mAdmin: 1393, txt: "23h 13m (58%)" },
+  { name: "Christopher T. (Leave)", m2018: 993, mOther: 0, mAdmin: 0, txt: "16h 33m (41%)" }
+];
+var maxStaffMins = 2880;
+var line40Pct = (2400 / maxStaffMins * 100).toFixed(1);
+var sbHtml = "";
+staffList.forEach(function(st) {
+  var p2018 = (st.m2018 / maxStaffMins * 100).toFixed(1);
+  var pOth = (st.mOther / maxStaffMins * 100).toFixed(1);
+  var pAdm = (st.mAdmin / maxStaffMins * 100).toFixed(1);
+  sbHtml += '<div class="bar-row">' +
+    '<span style="font-weight:600">' + st.name + '</span>' +
+    '<div class="track">' +
+      (st.m2018 > 0 ? '<div class="fill-seg" style="width:' + p2018 + '%;background:var(--blue)" title="2018"></div>' : '') +
+      (st.mOther > 0 ? '<div class="fill-seg" style="width:' + pOth + '%;background:var(--purple)" title="Other Projects"></div>' : '') +
+      (st.mAdmin > 0 ? '<div class="fill-seg" style="width:' + pAdm + '%;background:var(--green)" title="Administration"></div>' : '') +
+      '<div class="line40" style="left:' + line40Pct + '%"></div>' +
+    '</div>' +
+    '<span style="text-align:right;font-weight:700;font-variant-numeric:tabular-nums">' + st.txt + '</span>' +
+  '</div>';
+});
+document.getElementById("staff-bars").innerHTML = sbHtml;
+
+// Tab Switching
+function showTab(tabId, btn) {
+  document.querySelectorAll(".tab-btn").forEach(function(b) { b.classList.remove("active"); });
+  btn.classList.add("active");
+  document.querySelectorAll(".tab-panel").forEach(function(p) {
+    if (tabId === "all" || p.getAttribute("data-tab") === tabId) {
+      p.classList.add("active");
+    } else {
+      p.classList.remove("active");
+    }
+  });
+}
+
+// Table Filtering
+var filterState = { stg: "all", modAct: "all", modArea: "all", dept: "all" };
+document.querySelectorAll(".flt").forEach(function(btn) {
+  btn.addEventListener("click", function() {
+    var t = btn.dataset.t, v = btn.dataset.v;
+    filterState[t] = v;
+    document.querySelectorAll('.flt[data-t="' + t + '"]').forEach(function(b) {
+      b.classList.toggle("active", b === btn);
+    });
+    applyFilters();
+  });
+});
+
+function applyFilters() {
+  var sc = 0;
+  document.querySelectorAll("#stgTbl tbody tr").forEach(function(tr) {
+    var show = filterState.stg === "all" || tr.dataset.bstat === filterState.stg || tr.dataset.bstat === "total";
+    tr.style.display = show ? "" : "none";
+    if (show && tr.dataset.bstat !== "total") sc++;
+  });
+  document.getElementById("stgCnt").textContent = sc + " stage rows shown";
+
+  var mc = 0, mt = 0;
+  document.querySelectorAll("#modTbl tbody tr").forEach(function(tr) {
+    mt++;
+    var okAct = filterState.modAct === "all" || tr.dataset.act === filterState.modAct;
+    var okArea = filterState.modArea === "all" || tr.dataset.area === filterState.modArea;
+    var show = okAct && okArea;
+    tr.style.display = show ? "" : "none";
+    if (show) mc++;
+  });
+  document.getElementById("modCnt").textContent = mc + " of " + mt + " modules shown";
+
+  var dc = 0, dt = 0;
+  document.querySelectorAll("#staffTbl tbody tr").forEach(function(tr) {
+    dt++;
+    var show = filterState.dept === "all" || tr.dataset.dept === filterState.dept;
+    tr.style.display = show ? "" : "none";
+    if (show) dc++;
+  });
+  document.getElementById("deptCnt").textContent = dc + " of " + dt + " staff shown";
+}
+applyFilters();
+</script>
+</body>
+</html>
