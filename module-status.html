@@ -134,7 +134,7 @@ footer{margin-top:10px;padding:14px 2px 0;border-top:1px solid var(--line);font-
 /* --- added: kpi with donut --- */
 .kpi.has-chart{display:flex;align-items:center;gap:10px}
 .kpi.has-chart .txt{flex:1;min-width:0}
-.kpi .donut{width:54px;height:54px;flex:none}
+.donut-wrap{width:52px;height:52px;flex:none;position:relative}
 
 /* --- added: chart wrap + view toggle --- */
 .chart-wrap{position:relative;margin-bottom:4px}
@@ -188,9 +188,9 @@ footer{margin-top:10px;padding:14px 2px 0;border-top:1px solid var(--line);font-
   <div id="sec-overview">
   <div class="kpis">
     <div class="kpi"><div class="k">Modules in scope</div><div class="v">89</div><div class="s">37 Crushing, 15 Screening, 36 Area 60, 1 Area 70</div></div>
-    <div class="kpi has-chart"><canvas class="donut" id="dn3d"></canvas><div class="txt"><div class="k">3D model done</div><div class="v">74 <small>/ 89</small></div></div></div>
-    <div class="kpi has-chart"><canvas class="donut" id="dnFab"></canvas><div class="txt"><div class="k">Fabrication done</div><div class="v">61 <small>/ 74</small></div></div></div>
-    <div class="kpi has-chart"><canvas class="donut" id="dnCalc"></canvas><div class="txt"><div class="k">Calc at Final Review</div><div class="v">27 <small>/ 44</small></div></div></div>
+    <div class="kpi has-chart"><div class="donut-wrap"><canvas id="dn3d"></canvas></div><div class="txt"><div class="k">3D model done</div><div class="v">74 <small>/ 89</small></div></div></div>
+    <div class="kpi has-chart"><div class="donut-wrap"><canvas id="dnFab"></canvas></div><div class="txt"><div class="k">Fabrication done</div><div class="v">61 <small>/ 74</small></div></div></div>
+    <div class="kpi has-chart"><div class="donut-wrap"><canvas id="dnCalc"></canvas></div><div class="txt"><div class="k">Calc at Final Review</div><div class="v">27 <small>/ 44</small></div></div></div>
     <div class="kpi bad"><div class="k">Calc lines past due 06/11</div><div class="v">3</div><div class="s">30-02 #48,49; 20-26 #52</div></div>
   </div>
 
@@ -447,7 +447,12 @@ function donut(id, done, other, otherColor, total){
   new Chart(document.getElementById(id), {
     type: "doughnut",
     data: { datasets: [{ data: [done, other], backgroundColor: [COL.done, otherColor], borderWidth: 0 }] },
-    options: { cutout: "72%", plugins: { legend: { display: false }, tooltip: { enabled: false } } }
+    options: {
+      cutout: "72%",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { enabled: false } }
+    }
   });
 }
 donut("dn3d", 64, 25, COL.doing, 89);
