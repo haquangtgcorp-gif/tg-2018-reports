@@ -117,6 +117,42 @@ footer{margin-top:10px;padding:14px 2px 0;border-top:1px solid var(--line);font-
 
 @media (max-width:1000px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.kpis{grid-template-columns:1fr} header{flex-direction:column;align-items:flex-start} header .right{text-align:left}}
+
+/* --- added: header action buttons --- */
+.hbtn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:7px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.hbtn:hover{background:rgba(255,255,255,.22)}
+.hgrp{display:flex;gap:8px;align-self:flex-start}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--head);color:#fff;padding:8px 18px;border-radius:999px;font-size:12.5px;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+
+/* --- added: quick nav --- */
+.nav{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);display:flex;gap:6px;padding:9px 22px;max-width:1180px;margin:0 auto;flex-wrap:wrap;box-shadow:0 1px 2px rgba(16,32,52,.05)}
+.nav button{border:1px solid var(--line);background:#f8fafc;color:var(--muted);border-radius:999px;padding:6px 14px;font-size:12.5px;font-weight:700;cursor:pointer;transition:.12s}
+.nav button:hover{border-color:var(--accent);color:var(--accent)}
+.nav button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* --- added: kpi with donut --- */
+.kpi.has-chart{display:flex;align-items:center;gap:10px}
+.kpi.has-chart .txt{flex:1;min-width:0}
+.kpi .donut{width:54px;height:54px;flex:none}
+
+/* --- added: chart wrap + view toggle --- */
+.chart-wrap{position:relative;margin-bottom:4px}
+.chart-wrap canvas{max-height:260px}
+.viewtog{display:flex;gap:6px;margin-left:auto}
+.viewtog button{border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:7px;padding:4px 11px;font-size:11.5px;font-weight:700;cursor:pointer}
+.viewtog button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.tbl-collapsible{margin-top:12px}
+
+/* --- added: collapsible note cards --- */
+.card > details{border:0}
+.card summary{list-style:none;cursor:pointer;font-size:15px;margin:0;padding:13px 18px;border-bottom:1px solid var(--line);font-weight:700;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.card summary::-webkit-details-marker{display:none}
+.card summary .chev{margin-left:auto;font-size:11px;color:var(--muted);font-weight:700}
+.card summary .cnt-badge{background:var(--bg);color:var(--muted);border-radius:999px;padding:1px 9px;font-size:11.5px;font-weight:700}
+.card details[open] summary .chev:after{content:"Hide \25B2"}
+.card details:not([open]) summary .chev:after{content:"Show \25BC"}
+.card details:not([open]) summary{border-bottom:0}
 </style>
 </head>
 <body>
@@ -132,47 +168,41 @@ footer{margin-top:10px;padding:14px 2px 0;border-top:1px solid var(--line);font-
     Report date <b>11/11/2026</b><br>
     Data as of 11/11/2026 17:01 AWST
   </div>
+  <div class="hgrp">
+    <button class="hbtn" onclick="window.print()">&#128424; Print</button>
+    <button class="hbtn" id="btnCopy">&#128279; Copy link</button>
+  </div>
 </header>
+
+<nav class="nav" id="quickNav">
+  <button data-go="sec-overview" class="on">Overview</button>
+  <button data-go="sec-open">Open items</button>
+  <button data-go="sec-registry">Registry</button>
+  <button data-go="sec-notes">Decisions &amp; notes</button>
+</nav>
 
 <main>
 
-  <p class="headline">3D and fabrication drawings are largely done. Engineering calculation is the open risk: no calculation line is Completed, and 3 lines due 06/11 are still open. Of the 12 lines due 13/11, 9 have no originator.</p>
+  <p class="headline">3D and fab drawings are largely done. Calculation is the open risk: no line Completed, 3 lines past due 06/11.</p>
 
+  <div id="sec-overview">
   <div class="kpis">
     <div class="kpi"><div class="k">Modules in scope</div><div class="v">89</div><div class="s">37 Crushing, 15 Screening, 36 Area 60, 1 Area 70</div></div>
-    <div class="kpi"><div class="k">3D model done</div><div class="v">74 <small>/ 89</small></div>
-      <div class="sbar"><i class="done" style="flex:64"></i><i class="checking" style="flex:10"></i><i class="doing" style="flex:15"></i></div>
-      <div class="s">64 checked, 10 reference models, 15 in progress</div></div>
-    <div class="kpi"><div class="k">Fabrication drawings done</div><div class="v">61 <small>/ 74</small></div>
-      <div class="sbar"><i class="done" style="flex:61"></i><i class="doing" style="flex:4"></i><i class="todo" style="flex:9"></i></div>
-      <div class="s">All 61 checked; 4 in progress, 9 not started</div></div>
-    <div class="kpi"><div class="k">Calc lines at Final Review</div><div class="v">27 <small>/ 44</small></div>
-      <div class="sbar"><i class="done" style="flex:27"></i><i class="doing" style="flex:5"></i><i class="checking" style="flex:2"></i><i class="todo" style="flex:10"></i></div>
-      <div class="s">0 Completed; 17 lines not yet at Final Review</div></div>
-    <div class="kpi bad"><div class="k">Calc lines past due 06/11</div><div class="v">3</div><div class="s">30-02 items 48, 49; 20-26 item 52. 12 more due 13/11</div></div>
+    <div class="kpi has-chart"><canvas class="donut" id="dn3d"></canvas><div class="txt"><div class="k">3D model done</div><div class="v">74 <small>/ 89</small></div></div></div>
+    <div class="kpi has-chart"><canvas class="donut" id="dnFab"></canvas><div class="txt"><div class="k">Fabrication done</div><div class="v">61 <small>/ 74</small></div></div></div>
+    <div class="kpi has-chart"><canvas class="donut" id="dnCalc"></canvas><div class="txt"><div class="k">Calc at Final Review</div><div class="v">27 <small>/ 44</small></div></div></div>
+    <div class="kpi bad"><div class="k">Calc lines past due 06/11</div><div class="v">3</div><div class="s">30-02 #48,49; 20-26 #52</div></div>
   </div>
 
   <div class="card">
     <h2>Progress by stage <span class="muted">number of modules</span></h2>
     <div class="inner">
-    <div class="legend">
-      <span><i class="dot" style="background:var(--done)"></i>Done &amp; checked</span>
-      <span><i class="dot" style="background:var(--check-solid)"></i>Done, not checked</span>
-      <span><i class="dot" style="background:var(--doing)"></i>In progress</span>
-      <span><i class="dot" style="background:#9ca3af"></i>Not started</span>
-    </div>
-    <div class="stage"><div class="stage-h"><b>3D Model</b><span>74 of 89 applicable modules done &middot; 0 n/a</span></div>
-      <div class="bar"><div class="seg done" style="flex:64">64</div><div class="seg checking" style="flex:10">10</div><div class="seg doing" style="flex:15">15</div></div></div>
-    <div class="stage"><div class="stage-h"><b>2D Mechanical Drawing</b><span>5 of 19 applicable modules done &middot; 70 n/a</span></div>
-      <div class="bar"><div class="seg done" style="flex:5">5</div><div class="seg doing" style="flex:10">10</div><div class="seg todo" style="flex:4">4</div></div></div>
-    <div class="stage"><div class="stage-h"><b>2D Fabrication Drawing</b><span>61 of 73 applicable modules done &middot; 16 n/a</span></div>
-      <div class="bar"><div class="seg done" style="flex:61">61</div><div class="seg doing" style="flex:4">4</div><div class="seg todo" style="flex:8">8</div></div></div>
-    <div class="stage"><div class="stage-h"><b>Engineering Calculation</b><span>19 of 30 applicable modules done &middot; 59 n/a</span></div>
-      <div class="bar"><div class="seg checking" style="flex:19">19</div><div class="seg doing" style="flex:5">5</div><div class="seg todo" style="flex:6">6</div></div></div>
+    <div class="chart-wrap"><canvas id="stageChart" height="150"></canvas></div>
     </div>
   </div>
+  </div>
 
-  <div class="card">
+  <div class="card" id="sec-open">
     <h2>Open items by module <span class="muted">filter below</span></h2>
     <div class="inner">
     <div class="filters">
@@ -182,6 +212,7 @@ footer{margin-top:10px;padding:14px 2px 0;border-top:1px solid var(--line);font-
       <span class="grp-label" style="margin-left:10px">Area:</span>
       <button class="flt active" data-f="area" data-v="all">All</button>
       <button class="flt" data-f="area" data-v="Crushing">Crushing</button><button class="flt" data-f="area" data-v="Screening">Screening</button><button class="flt" data-f="area" data-v="Area 60">Area 60</button><button class="flt" data-f="area" data-v="Area 70">Area 70</button>
+      <button class="hbtn" id="btnReset" style="background:#fff;border-color:var(--line);color:var(--muted);margin-left:8px">Reset</button>
       <span class="count-tag" id="cnt"></span>
     </div>
     <table id="openTbl" class="small">
@@ -244,10 +275,13 @@ footer{margin-top:10px;padding:14px 2px 0;border-top:1px solid var(--line);font-
     </div>
   </div>
 
-  <div class="card">
-    <h2>Module status as written in the Progress Log</h2>
+  <div class="card" id="sec-registry">
+    <h2>Module status as written in the Progress Log
+      <span class="viewtog"><button class="on" data-tv="chart1">Chart</button><button data-tv="table1">Table</button></span>
+    </h2>
     <div class="inner">
-    <table class="ct">
+    <div class="chart-wrap" data-v="chart1"><canvas id="statusChart" height="160"></canvas></div>
+    <table class="ct tbl-collapsible" data-v="table1" style="display:none">
       <thead><tr><th>Area</th><th>Completed</th><th>For Review</th><th>In Progress</th><th>Not Started</th><th>Paused</th><th>Ref.</th><th>Total</th></tr></thead>
       <tbody>
         <tr><td class="n">Crushing (20-xx, 2000)</td><td class="cc done">22</td><td class="cc z">0</td><td class="cc doing">3</td><td class="cc todo">3</td><td class="cc z">0</td><td class="cc na">9</td><td class="cc na"><b>37</b></td></tr>
@@ -261,9 +295,12 @@ footer{margin-top:10px;padding:14px 2px 0;border-top:1px solid var(--line);font-
   </div>
 
   <div class="card">
-    <h2>Calculation lines by Registry status</h2>
+    <h2>Calculation lines by Registry status
+      <span class="viewtog"><button class="on" data-tv="chart2">Chart</button><button data-tv="table2">Table</button></span>
+    </h2>
     <div class="inner">
-    <table class="ct small">
+    <div class="chart-wrap" data-v="chart2"><canvas id="calcChart" height="160"></canvas></div>
+    <table class="ct small tbl-collapsible" data-v="table2" style="display:none">
       <thead><tr><th>Area</th><th>Modules</th><th>Calc lines</th><th>Final Review</th><th>Backdraft</th><th>Draft</th><th>Initial Review</th><th>Unassigned</th><th>Completed</th></tr></thead>
       <tbody>
         <tr><td class="n">Crushing (20-xx, 2000)</td><td class="cc na">12</td><td class="cc na">19</td><td class="cc done">13</td><td class="cc doing">1</td><td class="cc checking">1</td><td class="cc z">0</td><td class="cc todo">4</td><td class="cc z">0</td></tr>
@@ -276,8 +313,10 @@ footer{margin-top:10px;padding:14px 2px 0;border-top:1px solid var(--line);font-
     </div>
   </div>
 
+  <div id="sec-notes">
   <div class="card">
-    <h2>Decisions needed</h2>
+    <details open>
+    <summary>Decisions needed <span class="cnt-badge">3</span><span class="chev"></span></summary>
     <div class="inner">
     <ol class="dec">
       <li><b>Finish or re-date 3 lines past due 06/11:</b> 30-02 items 48 (Backdraft) and 49 (Unassigned), 20-26 item 52 (Draft). Then assign originators to 9 of the 12 lines due 13/11.</li>
@@ -285,10 +324,12 @@ footer{margin-top:10px;padding:14px 2px 0;border-top:1px solid var(--line);font-
       <li><b>Confirm 59 modules need no calculation.</b> They have no Registry line and the log shows calculation as N/A.</li>
     </ol>
     </div>
+    </details>
   </div>
 
   <div class="card">
-    <h2>Data flags to confirm with module owners</h2>
+    <details>
+    <summary>Data flags to confirm with module owners <span class="cnt-badge">4</span><span class="chev"></span></summary>
     <div class="inner">
     <table class="small">
       <thead><tr><th>Flag</th><th>Modules</th><th>Evidence in source</th><th>Check</th></tr></thead>
@@ -300,20 +341,24 @@ footer{margin-top:10px;padding:14px 2px 0;border-top:1px solid var(--line);font-
       </tbody>
     </table>
     </div>
+    </details>
   </div>
 
   <div class="card">
-    <h2>Registry entry errors</h2>
+    <details>
+    <summary>Registry entry errors <span class="cnt-badge">4</span><span class="chev"></span></summary>
     <div class="inner pts">
       <p>&bull; Items 49, 53: status Unassigned, but originator is CPT (49) and JDP (53).</p>
       <p>&bull; Items 95, 96: Backdraft with no originator.</p>
       <p>&bull; Item 12: Final Review with no originator. Item 17: no calculation number.</p>
       <p>&bull; Item 20 carries project code 2010 (2010-20-32). Items 13, 14 carry project code 2000.</p>
     </div>
+    </details>
   </div>
 
   <div class="card">
-    <h2>Other points to note</h2>
+    <details>
+    <summary>Other points to note <span class="cnt-badge">5</span><span class="chev"></span></summary>
     <div class="inner pts">
       <p>&bull; Progress Log edit of 11/11 17:01: only 20-06 changed in scope (Overall 90% to 95%, Structural calc 0% to 100%, not checked). Registry edit of 11/11 14:48: the 20-06 line is now Final Review (JDP, dated 11/11, title "Wing Wall Earth Pressure", priority blank) and moved to item 43, so items 46 to 52 and 67 of the last report are now 47 to 53 and 68.</p>
       <p>&bull; WhatsApp 11/11 (Jayson, 20-01 group): wing wall earth pressure calculation done and the wing wall added to the crushing structure model (it was not in the 2010 STAAD model); 20-01 STAAD update and review ongoing.</p>
@@ -321,6 +366,8 @@ footer{margin-top:10px;padding:14px 2px 0;border-top:1px solid var(--line);font-
       <p>&bull; No forward delivery date: every date in the Package Delivery column is in 2024-2025; the rest are "-", "*", "TBC" or blank.</p>
       <p>&bull; A 2018 Project Team message of 27/10 cites 31 priority calculations for this area. The Registry has 44 lines under the current module list; the list of 31 has not been reconciled.</p>
     </div>
+    </details>
+  </div>
   </div>
 
   <footer>
@@ -331,7 +378,10 @@ footer{margin-top:10px;padding:14px 2px 0;border-top:1px solid var(--line);font-
 
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script>
+const COL = { done:"#15803d", checking:"#f59e0b", doing:"#1d4ed8", todo:"#94a3b8", warn:"#c81e1e", accent:"#0f4c81", na:"#cfd4db" };
+
 const state = { stage: "all", area: "all" };
 document.querySelectorAll(".flt").forEach(btn => {
   btn.addEventListener("click", () => {
@@ -353,6 +403,115 @@ function applyFilter(){
   document.getElementById("cnt").textContent = shown + " of 52 items shown";
 }
 applyFilter();
+document.getElementById("btnReset").addEventListener("click", () => {
+  state.stage = "all"; state.area = "all";
+  document.querySelectorAll('.flt[data-f="stage"]').forEach(b => b.classList.toggle("active", b.dataset.v === "all"));
+  document.querySelectorAll('.flt[data-f="area"]').forEach(b => b.classList.toggle("active", b.dataset.v === "all"));
+  applyFilter();
+});
+
+/* quick nav: scroll + active state */
+document.querySelectorAll("#quickNav button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("#quickNav button").forEach(b => b.classList.toggle("on", b === btn));
+    const el = document.getElementById(btn.dataset.go);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+
+/* copy link + print */
+document.getElementById("btnCopy").addEventListener("click", () => {
+  navigator.clipboard.writeText(location.href).then(() => {
+    const t = document.getElementById("toast");
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 1600);
+  });
+});
+
+/* chart / table toggle buttons */
+document.querySelectorAll(".viewtog button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const group = btn.closest(".viewtog");
+    group.querySelectorAll("button").forEach(b => b.classList.remove("on"));
+    btn.classList.add("on");
+    const card = btn.closest(".card");
+    card.querySelectorAll("[data-v]").forEach(el => { el.style.display = "none"; });
+    card.querySelectorAll('[data-v="' + btn.dataset.tv + '"]').forEach(el => { el.style.display = ""; });
+  });
+});
+
+Chart.defaults.font.family = "'Segoe UI',system-ui,Arial,sans-serif";
+Chart.defaults.font.size = 11.5;
+
+function donut(id, done, other, otherColor, total){
+  new Chart(document.getElementById(id), {
+    type: "doughnut",
+    data: { datasets: [{ data: [done, other], backgroundColor: [COL.done, otherColor], borderWidth: 0 }] },
+    options: { cutout: "72%", plugins: { legend: { display: false }, tooltip: { enabled: false } } }
+  });
+}
+donut("dn3d", 64, 25, COL.doing, 89);
+donut("dnFab", 61, 13, COL.todo, 74);
+donut("dnCalc", 27, 17, COL.todo, 44);
+
+new Chart(document.getElementById("stageChart"), {
+  type: "bar",
+  data: {
+    labels: ["3D Model", "2D Mechanical", "2D Fabrication", "Eng. Calculation"],
+    datasets: [
+      { label: "Done & checked", data: [64, 5, 61, 0], backgroundColor: COL.done, stack: "s" },
+      { label: "Done, not checked", data: [10, 0, 0, 19], backgroundColor: COL.checking, stack: "s" },
+      { label: "In progress", data: [15, 10, 4, 5], backgroundColor: COL.doing, stack: "s" },
+      { label: "Not started", data: [0, 4, 8, 6], backgroundColor: COL.todo, stack: "s" }
+    ]
+  },
+  options: {
+    indexAxis: "y",
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, grid: { display: false } } },
+    plugins: { legend: { position: "bottom" } }
+  }
+});
+
+new Chart(document.getElementById("statusChart"), {
+  type: "bar",
+  data: {
+    labels: ["Crushing", "Screening", "Area 60", "Area 70"],
+    datasets: [
+      { label: "Completed", data: [22, 8, 13, 0], backgroundColor: COL.done, stack: "s" },
+      { label: "For Review", data: [0, 0, 6, 1], backgroundColor: COL.checking, stack: "s" },
+      { label: "In Progress", data: [3, 5, 14, 0], backgroundColor: COL.doing, stack: "s" },
+      { label: "Not Started", data: [3, 0, 3, 0], backgroundColor: COL.todo, stack: "s" },
+      { label: "Paused", data: [0, 1, 0, 0], backgroundColor: COL.warn, stack: "s" }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, grid: { display: false } } },
+    plugins: { legend: { position: "bottom" } }
+  }
+});
+
+new Chart(document.getElementById("calcChart"), {
+  type: "bar",
+  data: {
+    labels: ["Crushing", "Screening", "Area 60", "Area 70"],
+    datasets: [
+      { label: "Final Review", data: [13, 3, 11, 0], backgroundColor: COL.done, stack: "s" },
+      { label: "Backdraft", data: [1, 1, 3, 0], backgroundColor: COL.doing, stack: "s" },
+      { label: "Draft", data: [1, 0, 0, 0], backgroundColor: COL.checking, stack: "s" },
+      { label: "Initial Review", data: [0, 1, 0, 0], backgroundColor: COL.accent, stack: "s" },
+      { label: "Unassigned", data: [4, 2, 4, 0], backgroundColor: COL.todo, stack: "s" }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, grid: { display: false } } },
+    plugins: { legend: { position: "bottom" } }
+  }
+});
 </script>
+<div class="toast" id="toast">Link copied</div>
 </body>
 </html>
