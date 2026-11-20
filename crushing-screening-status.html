@@ -177,15 +177,15 @@ tr.row-hidden{display:none}
     <span class="eyebrow">● 2018 Rhodes Ridge — Crushing &amp; Screening Scope</span>
     <h1>3D Model &amp; 2D Drawing Status Dashboard</h1>
     <div class="meta">
-      Data as of <b>20/11/2026</b> (ClickUp, Space "[2018] Rhodes Ridge") · Scope: Area 20 (37 modules incl. 2000), Area 30 (15 modules), Area 60 (35 Crushing &amp; Screening modules, đã bỏ 60-26), Area 70 (70-03, 70-09, 70-18) · Mode: ClickUp read-only, chưa đối chiếu Progress Log / WhatsApp
+      Data as of <b>20/11/2026</b> (ClickUp, Space "[2018] Rhodes Ridge") · Scope: Area 20 (37 modules incl. 2000), Area 30 (15 modules), Area 60 (35 Crushing &amp; Screening modules, 60-26 removed), Area 70 (70-03, 70-09, 70-18) · Mode: ClickUp read-only, not yet cross-checked against the Progress Log / WhatsApp
     </div>
     <div class="filterbar" id="filterbar">
-      <button class="chip active" data-area="all">Tất cả khu vực</button>
-      <button class="chip" data-area="20">Khu 20 — Crushing Station</button>
-      <button class="chip" data-area="30">Khu 30 — Screening Station</button>
-      <button class="chip" data-area="60">Khu 60 — Conveyor &amp; Belt Feeder</button>
-      <button class="chip" data-area="70">Khu 70 — Electrical</button>
-      <button class="chip print-chip" onclick="window.print()">In A3 / Lưu PDF</button>
+      <button class="chip active" data-area="all">All areas</button>
+      <button class="chip" data-area="20">Area 20 — Crushing Station</button>
+      <button class="chip" data-area="30">Area 30 — Screening Station</button>
+      <button class="chip" data-area="60">Area 60 — Conveyor &amp; Belt Feeder</button>
+      <button class="chip" data-area="70">Area 70 — Electrical</button>
+      <button class="chip print-chip" onclick="window.print()">Print A3 / Save PDF</button>
     </div>
   </div>
 </div>
@@ -194,35 +194,35 @@ tr.row-hidden{display:none}
 
   <div class="kpi-grid">
     <div class="kpi">
-      <div class="kpi-top"><span class="kpi-lbl">Module trong phạm vi</span><span class="kpi-dot" style="background:var(--blue)"></span></div>
+      <div class="kpi-top"><span class="kpi-lbl">Modules in scope</span><span class="kpi-dot" style="background:var(--blue)"></span></div>
       <div class="kpi-val">90</div>
-      <div class="kpi-sub">Khu 20 (37) · Khu 30 (15) · Khu 60 (35) · Khu 70 (3)</div>
+      <div class="kpi-sub">Area 20 (37) · Area 30 (15) · Area 60 (35) · Area 70 (3)</div>
     </div>
     <div class="kpi">
-      <div class="kpi-top"><span class="kpi-lbl">3D Model chưa xong</span><span class="kpi-dot" style="background:var(--amber)"></span></div>
+      <div class="kpi-top"><span class="kpi-lbl">3D Model incomplete</span><span class="kpi-dot" style="background:var(--amber)"></span></div>
       <div class="kpi-val" style="color:var(--amber)">12</div>
-      <div class="kpi-sub">Đều ở trạng thái "in progress"</div>
+      <div class="kpi-sub">All currently "in progress"</div>
     </div>
     <div class="kpi">
-      <div class="kpi-top"><span class="kpi-lbl">2D Drawing — còn phải LÀM</span><span class="kpi-dot" style="background:var(--red)"></span></div>
+      <div class="kpi-top"><span class="kpi-lbl">2D Drawing — still to DO</span><span class="kpi-dot" style="background:var(--red)"></span></div>
       <div class="kpi-val" style="color:var(--red)">18</div>
-      <div class="kpi-sub">Fabrication và/hoặc Mechanical Drawing chưa Do xong</div>
+      <div class="kpi-sub">Fabrication and/or Mechanical Drawing not yet done</div>
     </div>
     <div class="kpi">
-      <div class="kpi-top"><span class="kpi-lbl">2D Drawing — chỉ cần CHECK</span><span class="kpi-dot" style="background:#c9790a"></span></div>
+      <div class="kpi-top"><span class="kpi-lbl">2D Drawing — CHECK only</span><span class="kpi-dot" style="background:#c9790a"></span></div>
       <div class="kpi-val" style="color:#c9790a">10</div>
-      <div class="kpi-sub">Bước Do/Re-do đã xong, còn chờ Check/Re-check</div>
+      <div class="kpi-sub">Do/Re-do complete, Check/Re-check still pending</div>
     </div>
   </div>
 
   <!-- SECTION A: 3D MODEL -->
   <div class="section">
     <div class="section-head">
-      <h2>1. Module chưa hoàn thành bước 3D Model <span class="tag tag-amber">12 module</span></h2>
-      <span class="section-note" style="margin:0">Nguồn: task gốc "2. 3D Model" trên ClickUp</span>
+      <h2>1. Modules with incomplete 3D Model <span class="tag tag-amber">12 modules</span></h2>
+      <span class="section-note" style="margin:0">Source: root task "2. 3D Model" on ClickUp</span>
     </div>
     <table>
-      <thead><tr><th style="width:90px">Khu vực</th><th style="width:140px">Module</th><th>Tên module</th><th style="width:160px">Trạng thái</th></tr></thead>
+      <thead><tr><th style="width:90px">Area</th><th style="width:140px">Module</th><th>Module name</th><th style="width:160px">Status</th></tr></thead>
       <tbody id="tbl-3d"></tbody>
     </table>
   </div>
@@ -230,11 +230,11 @@ tr.row-hidden{display:none}
   <!-- SECTION B: 2D DRAWING - NEED DO -->
   <div class="section">
     <div class="section-head">
-      <h2>2. Module còn phải LÀM bản vẽ 2D (đang làm / chưa làm) <span class="tag tag-red">18 module</span></h2>
-      <span class="section-note" style="margin:0">Nhánh "Fabrication Drawing" / "Mechanical Drawing" còn task "Do/Re-do" chưa complete</span>
+      <h2>2. Modules still needing 2D drawing work (in progress / not started) <span class="tag tag-red">18 modules</span></h2>
+      <span class="section-note" style="margin:0">"Fabrication Drawing" / "Mechanical Drawing" branch still has an incomplete "Do/Re-do" task</span>
     </div>
     <table>
-      <thead><tr><th style="width:90px">Khu vực</th><th style="width:140px">Module</th><th>Tên module</th><th style="width:260px">Nhánh còn phải làm</th></tr></thead>
+      <thead><tr><th style="width:90px">Area</th><th style="width:140px">Module</th><th>Module name</th><th style="width:260px">Branch still to do</th></tr></thead>
       <tbody id="tbl-do"></tbody>
     </table>
   </div>
@@ -242,21 +242,21 @@ tr.row-hidden{display:none}
   <!-- SECTION C: 2D DRAWING - CHECK ONLY -->
   <div class="section">
     <div class="section-head">
-      <h2>3. Module chỉ còn chờ CHECK bản vẽ 2D <span class="tag tag-amber">10 module</span></h2>
-      <span class="section-note" style="margin:0">Task "Do/Re-do" đã complete, còn task "Check/Re-check" chưa complete</span>
+      <h2>3. Modules only awaiting 2D drawing CHECK <span class="tag tag-amber">10 modules</span></h2>
+      <span class="section-note" style="margin:0">"Do/Re-do" task complete, "Check/Re-check" task still incomplete</span>
     </div>
     <table>
-      <thead><tr><th style="width:90px">Khu vực</th><th style="width:140px">Module</th><th>Tên module</th><th style="width:260px">Nhánh cần check</th></tr></thead>
+      <thead><tr><th style="width:90px">Area</th><th style="width:140px">Module</th><th>Module name</th><th style="width:260px">Branch needing check</th></tr></thead>
       <tbody id="tbl-check"></tbody>
     </table>
   </div>
 
   <div class="foot-note">
-    <b>Giới hạn số liệu (đọc kỹ trước khi báo khách):</b>
+    <b>Data limitations (read before sharing with the client):</b>
     <ul>
-      <li>Số liệu lấy trực tiếp từ trạng thái task trên ClickUp (Space "[2018] Rhodes Ridge"), <b>chưa đối chiếu</b> với Progress Log hay các nhóm WhatsApp dự án.</li>
-      <li>Phạm vi khu 70 là 3 module 70-03, 70-09, 70-18 theo xác nhận của anh Quang ngày 20/11/2026; module 60-26 đã bỏ khỏi danh sách khu 60.</li>
-      <li>62/90 module còn lại (không nằm trong 3 bảng trên) đã hoàn thành cả 3D Model và 2D Drawing (Fabrication + Mechanical, Do và Check).</li>
+      <li>Figures are taken directly from ClickUp task status (Space "[2018] Rhodes Ridge"), <b>not yet cross-checked</b> against the Progress Log or project WhatsApp groups.</li>
+      <li>Area 70 scope is the 3 modules 70-03, 70-09, 70-18 as confirmed by Quang Ha on 20/11/2026; module 60-26 has been removed from the Area 60 list.</li>
+      <li>The remaining 62/90 modules (not listed in the 3 tables above) have completed both 3D Model and 2D Drawing (Fabrication + Mechanical, Do and Check).</li>
     </ul>
   </div>
 
@@ -323,11 +323,11 @@ function renderRows(targetId, rows, kind){
   var html = "";
   rows.forEach(function(r){
     html += '<tr data-area="' + r.area + '">';
-    html += '<td><span class="' + areaPillClass(r.area) + '">Khu ' + r.area + '</span></td>';
+    html += '<td><span class="' + areaPillClass(r.area) + '">Area ' + r.area + '</span></td>';
     html += '<td class="mcode">' + r.code + '</td>';
     html += '<td>' + r.name + '</td>';
     if (kind === "3d") {
-      var chip = r.status === "in progress" ? '<span class="status-chip sc-inprogress">in progress</span>' : '<span class="status-chip sc-unknown">chưa có dữ liệu</span>';
+      var chip = r.status === "in progress" ? '<span class="status-chip sc-inprogress">in progress</span>' : '<span class="status-chip sc-unknown">no data</span>';
       html += '<td>' + chip + '</td>';
     } else {
       var branchHtml = r.branches.map(branchTag).join(" ");
