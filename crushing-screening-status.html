@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T&amp;G 2018 Rhodes Ridge — Crushing &amp; Screening: 3D Model &amp; 2D Drawing Status (20/11/2026)</title>
+<style>
+:root{
+  --bg:#0f1320;
+  --bg-soft:#f4f6fb;
+  --card:#ffffff;
+  --ink:#1b2236;
+  --sub:#667085;
+  --line:#e6e9f0;
+  --blue:#2f5bea;
+  --blue-bg:#eef2ff;
+  --green:#12916b;
+  --green-bg:#e9f9f1;
+  --amber:#c9790a;
+  --amber-bg:#fff6e6;
+  --red:#d7373f;
+  --red-bg:#fdedee;
+  --purple:#7c4ee0;
+  --purple-bg:#f4eefe;
+  --grey:#98a2b3;
+}
+*{box-sizing:border-box;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+body{
+  margin:0;
+  background:var(--bg-soft);
+  color:var(--ink);
+  font:14px/1.55 "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+.wrap{max-width:1400px;margin:0 auto;padding:0 20px 56px}
+
+.topband{
+  background:linear-gradient(120deg,#0f1320 0%,#1b2a6b 55%,#2f5bea 100%);
+  color:#fff;
+  padding:26px 24px 60px;
+  margin-bottom:-40px;
+}
+.topband-inner{max-width:1400px;margin:0 auto}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  background:rgba(255,255,255,0.12);
+  padding:5px 12px;border-radius:99px;
+  border:1px solid rgba(255,255,255,0.25);
+}
+.topband h1{font-size:26px;margin:14px 0 6px;font-weight:700;letter-spacing:-0.01em}
+.topband .meta{color:#cbd4f5;font-size:12.5px}
+.topband .meta b{color:#fff}
+
+.filterbar{
+  display:flex;gap:8px;flex-wrap:wrap;align-items:center;
+  margin-top:18px;
+}
+.chip{
+  border:1px solid rgba(255,255,255,0.3);
+  background:rgba(255,255,255,0.08);
+  color:#fff;
+  padding:7px 15px;border-radius:99px;
+  font-size:12.5px;font-weight:600;cursor:pointer;
+  transition:all .15s;
+}
+.chip:hover{background:rgba(255,255,255,0.18)}
+.chip.active{background:#fff;color:#16203f;border-color:#fff}
+.print-chip{
+  margin-left:auto;
+  background:var(--green);border-color:var(--green);color:#fff;
+}
+.print-chip:hover{background:#0e7a59}
+
+.kpi-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  position:relative;z-index:2;margin-bottom:22px;
+}
+.kpi{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:16px 18px;
+  box-shadow:0 10px 28px -14px rgba(16,24,55,0.25);
+}
+.kpi-top{display:flex;justify-content:space-between;align-items:flex-start}
+.kpi-lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--sub);font-weight:700}
+.kpi-dot{width:9px;height:9px;border-radius:50%;margin-top:3px}
+.kpi-val{font-size:30px;font-weight:800;margin:6px 0 2px;letter-spacing:-0.02em}
+.kpi-sub{font-size:12px;color:var(--sub)}
+
+.section{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px 20px 20px;
+  margin-bottom:16px;
+  box-shadow:0 1px 2px rgba(16,24,40,0.03);
+}
+.section-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+.section-head h2{font-size:16px;margin:0;display:flex;align-items:center;gap:9px}
+.section-head .tag{
+  font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;
+}
+.tag-red{background:var(--red-bg);color:var(--red)}
+.tag-amber{background:var(--amber-bg);color:var(--amber)}
+.tag-blue{background:var(--blue-bg);color:var(--blue)}
+.section-note{color:var(--sub);font-size:12px;margin:2px 0 14px}
+
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:9px 11px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:#f8f9fd;color:#475467;font-weight:700;font-size:10.8px;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:none}
+tr.row-hidden{display:none}
+
+.mcode{font-weight:700;color:var(--ink)}
+.area-pill{
+  display:inline-block;font-size:10.5px;font-weight:700;
+  padding:2px 8px;border-radius:6px;
+  background:#eef0f6;color:#475467;
+}
+.area-20{background:#eef2ff;color:#3346c7}
+.area-30{background:#f4eefe;color:#6a2fd6}
+.area-60{background:#fff1e6;color:#b35c12}
+.area-70{background:#eafaf1;color:#0c8a52}
+
+.status-chip{
+  display:inline-block;font-size:11px;font-weight:700;
+  padding:3px 9px;border-radius:99px;
+}
+.sc-inprogress{background:var(--amber-bg);color:var(--amber)}
+.sc-todo{background:var(--red-bg);color:var(--red)}
+.sc-unknown{background:#f2f4f7;color:#475467}
+.branch-tag{
+  display:inline-block;font-size:10.5px;font-weight:700;
+  padding:2px 8px;border-radius:6px;margin-right:4px;
+}
+.bt-fab{background:#fde9e9;color:#b02a30}
+.bt-mech{background:#e8efff;color:#2744b5}
+.bt-check{background:#fff3da;color:#95650a}
+
+.empty-row td{color:var(--sub);font-style:italic;text-align:center;padding:16px}
+
+.foot-note{
+  background:#fffaf0;
+  border:1px solid #fde8c2;
+  border-radius:12px;
+  padding:14px 18px;
+  font-size:12.5px;
+  color:#6b4c06;
+  margin-top:4px;
+}
+.foot-note b{color:#4a3600}
+.foot-note ul{margin:6px 0 0;padding-left:18px}
+.foot-note li{margin-bottom:4px}
+
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--sub);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:9px;height:9px;border-radius:3px;display:inline-block}
+
+@media (max-width:1100px){
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+}
+@page{size:A3 landscape;margin:10mm}
+@media print{
+  .topband{background:#16203f!important;margin-bottom:16px}
+  .filterbar{display:none}
+  body{background:#fff}
+  .section{box-shadow:none;break-inside:avoid;page-break-inside:avoid}
+  tr.row-hidden{display:table-row!important}
+}
+</style>
+</head>
+<body>
+
+<div class="topband">
+  <div class="topband-inner">
+    <span class="eyebrow">● 2018 Rhodes Ridge — Crushing &amp; Screening Scope</span>
+    <h1>3D Model &amp; 2D Drawing Status Dashboard</h1>
+    <div class="meta">
+      Data as of <b>20/11/2026</b> (ClickUp, Space "[2018] Rhodes Ridge") · Scope: Area 20 (37 modules incl. 2000), Area 30 (15 modules), Area 60 (35 Crushing &amp; Screening modules, đã bỏ 60-26), Area 70 (70-03, 70-09, 70-18) · Mode: ClickUp read-only, chưa đối chiếu Progress Log / WhatsApp
+    </div>
+    <div class="filterbar" id="filterbar">
+      <button class="chip active" data-area="all">Tất cả khu vực</button>
+      <button class="chip" data-area="20">Khu 20 — Crushing Station</button>
+      <button class="chip" data-area="30">Khu 30 — Screening Station</button>
+      <button class="chip" data-area="60">Khu 60 — Conveyor &amp; Belt Feeder</button>
+      <button class="chip" data-area="70">Khu 70 — Electrical</button>
+      <button class="chip print-chip" onclick="window.print()">In A3 / Lưu PDF</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-top"><span class="kpi-lbl">Module trong phạm vi</span><span class="kpi-dot" style="background:var(--blue)"></span></div>
+      <div class="kpi-val">90</div>
+      <div class="kpi-sub">Khu 20 (37) · Khu 30 (15) · Khu 60 (35) · Khu 70 (3)</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-top"><span class="kpi-lbl">3D Model chưa xong</span><span class="kpi-dot" style="background:var(--amber)"></span></div>
+      <div class="kpi-val" style="color:var(--amber)">12</div>
+      <div class="kpi-sub">Đều ở trạng thái "in progress"</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-top"><span class="kpi-lbl">2D Drawing — còn phải LÀM</span><span class="kpi-dot" style="background:var(--red)"></span></div>
+      <div class="kpi-val" style="color:var(--red)">18</div>
+      <div class="kpi-sub">Fabrication và/hoặc Mechanical Drawing chưa Do xong</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-top"><span class="kpi-lbl">2D Drawing — chỉ cần CHECK</span><span class="kpi-dot" style="background:#c9790a"></span></div>
+      <div class="kpi-val" style="color:#c9790a">10</div>
+      <div class="kpi-sub">Bước Do/Re-do đã xong, còn chờ Check/Re-check</div>
+    </div>
+  </div>
+
+  <!-- SECTION A: 3D MODEL -->
+  <div class="section">
+    <div class="section-head">
+      <h2>1. Module chưa hoàn thành bước 3D Model <span class="tag tag-amber">12 module</span></h2>
+      <span class="section-note" style="margin:0">Nguồn: task gốc "2. 3D Model" trên ClickUp</span>
+    </div>
+    <table>
+      <thead><tr><th style="width:90px">Khu vực</th><th style="width:140px">Module</th><th>Tên module</th><th style="width:160px">Trạng thái</th></tr></thead>
+      <tbody id="tbl-3d"></tbody>
+    </table>
+  </div>
+
+  <!-- SECTION B: 2D DRAWING - NEED DO -->
+  <div class="section">
+    <div class="section-head">
+      <h2>2. Module còn phải LÀM bản vẽ 2D (đang làm / chưa làm) <span class="tag tag-red">18 module</span></h2>
+      <span class="section-note" style="margin:0">Nhánh "Fabrication Drawing" / "Mechanical Drawing" còn task "Do/Re-do" chưa complete</span>
+    </div>
+    <table>
+      <thead><tr><th style="width:90px">Khu vực</th><th style="width:140px">Module</th><th>Tên module</th><th style="width:260px">Nhánh còn phải làm</th></tr></thead>
+      <tbody id="tbl-do"></tbody>
+    </table>
+  </div>
+
+  <!-- SECTION C: 2D DRAWING - CHECK ONLY -->
+  <div class="section">
+    <div class="section-head">
+      <h2>3. Module chỉ còn chờ CHECK bản vẽ 2D <span class="tag tag-amber">10 module</span></h2>
+      <span class="section-note" style="margin:0">Task "Do/Re-do" đã complete, còn task "Check/Re-check" chưa complete</span>
+    </div>
+    <table>
+      <thead><tr><th style="width:90px">Khu vực</th><th style="width:140px">Module</th><th>Tên module</th><th style="width:260px">Nhánh cần check</th></tr></thead>
+      <tbody id="tbl-check"></tbody>
+    </table>
+  </div>
+
+  <div class="foot-note">
+    <b>Giới hạn số liệu (đọc kỹ trước khi báo khách):</b>
+    <ul>
+      <li>Số liệu lấy trực tiếp từ trạng thái task trên ClickUp (Space "[2018] Rhodes Ridge"), <b>chưa đối chiếu</b> với Progress Log hay các nhóm WhatsApp dự án.</li>
+      <li>Phạm vi khu 70 là 3 module 70-03, 70-09, 70-18 theo xác nhận của anh Quang ngày 20/11/2026; module 60-26 đã bỏ khỏi danh sách khu 60.</li>
+      <li>62/90 module còn lại (không nằm trong 3 bảng trên) đã hoàn thành cả 3D Model và 2D Drawing (Fabrication + Mechanical, Do và Check).</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+var data3d = [
+  {area:"20", code:"20-01", name:"Crushing Structure (Main Frame)", status:"in progress"},
+  {area:"20", code:"20-08", name:"ROM Hopper", status:"in progress"},
+  {area:"20", code:"20-60", name:"Grizzly Feeder Guard", status:"in progress"},
+  {area:"20", code:"20-61", name:"HP6 Sensor Bracket for CR02 & CR03", status:"in progress"},
+  {area:"30", code:"30-18", name:"Under Pan CV03 Transfer Chute (CV 1200 mm)", status:"in progress"},
+  {area:"30", code:"30-22", name:"Water Pipeline - System", status:"in progress"},
+  {area:"60", code:"60-12", name:"1500 Belt Feeder", status:"in progress"},
+  {area:"60", code:"60-13", name:"1200 Belt Feeder", status:"in progress"},
+  {area:"60", code:"60-22", name:"Under Pan CV03 & CV04", status:"in progress"},
+  {area:"60", code:"60-28", name:"CV03 & CV04 Tail Structure - Take-up", status:"in progress"},
+  {area:"60", code:"60-30", name:"Pedestrian Underpass Cover", status:"in progress"},
+  {area:"70", code:"70-03", name:"Screen Station Equipment", status:"in progress"}
+];
+
+var dataDo = [
+  {area:"20", code:"20-01", name:"Crushing Structure (Main Frame)", branches:["Fab"]},
+  {area:"20", code:"20-08", name:"ROM Hopper", branches:["Fab"]},
+  {area:"20", code:"20-32", name:"CV01 Tail Structure", branches:["Fab"]},
+  {area:"20", code:"20-37", name:"1200 Belt Feeder Truss Support", branches:["Fab"]},
+  {area:"20", code:"20-60", name:"Grizzly Feeder Guard", branches:["Fab"]},
+  {area:"20", code:"20-61", name:"HP6 Sensor Bracket for CR02 & CR03", branches:["Fab"]},
+  {area:"30", code:"30-18", name:"Under Pan CV03 Transfer Chute (CV 1200 mm)", branches:["Fab"]},
+  {area:"30", code:"30-22", name:"Water Pipeline - System", branches:["Fab"]},
+  {area:"60", code:"60-09", name:"CV02 (STD Plate Conveyor) - Modification", branches:["Fab","Mech"]},
+  {area:"60", code:"60-12", name:"1500 Belt Feeder", branches:["Fab"]},
+  {area:"60", code:"60-13", name:"1200 Belt Feeder", branches:["Fab"]},
+  {area:"60", code:"60-22", name:"Under Pan CV03 & CV04", branches:["Fab"]},
+  {area:"60", code:"60-28", name:"CV03 & CV04 Tail Structure - Take-up", branches:["Fab","Mech"]},
+  {area:"60", code:"60-30", name:"Pedestrian Underpass Cover", branches:["Fab"]},
+  {area:"60", code:"60-42", name:"Conveyor CV03 & CV04 Mechanical", branches:["Mech"]},
+  {area:"60", code:"60-56", name:"CV02 Rock Shed", branches:["Fab","Mech"]},
+  {area:"70", code:"70-03", name:"Screen Station Equipment", branches:["Fab","Mech"]},
+  {area:"70", code:"70-18", name:"Tramp Magnet Structure", branches:["Fab"]}
+];
+
+var dataCheck = [
+  {area:"20", code:"20-03", name:"CV01 Skirting and Guard", branches:["Fab"]},
+  {area:"20", code:"20-40", name:"CV01 Mid Structure", branches:["Fab"]},
+  {area:"60", code:"60-08", name:"CV01 Truss", branches:["Fab"]},
+  {area:"60", code:"60-15", name:"CV02 Head Chute", branches:["Fab"]},
+  {area:"60", code:"60-24", name:"CV01 Head Chute 132 kW", branches:["Fab"]},
+  {area:"60", code:"60-40", name:"Conveyor CV01 Mechanical", branches:["Mech"]},
+  {area:"60", code:"60-41", name:"Conveyor CV02 Mechanical", branches:["Mech"]},
+  {area:"60", code:"60-63", name:"Belt Feeder 05 & 06 Mechanical", branches:["Mech"]},
+  {area:"60", code:"60-64", name:"Belt Feeder 01, 02, 03, 04 Mechanical", branches:["Mech"]},
+  {area:"60", code:"60-68", name:"Belt Clamp (STD)", branches:["Fab"]}
+];
+
+function areaPillClass(area){ return "area-pill area-" + area; }
+function branchTag(b){
+  var cls = b === "Fab" ? "bt-fab" : "bt-mech";
+  var label = b === "Fab" ? "Fabrication" : "Mechanical";
+  return '<span class="branch-tag ' + cls + '">' + label + '</span>';
+}
+
+function renderRows(targetId, rows, kind){
+  var html = "";
+  rows.forEach(function(r){
+    html += '<tr data-area="' + r.area + '">';
+    html += '<td><span class="' + areaPillClass(r.area) + '">Khu ' + r.area + '</span></td>';
+    html += '<td class="mcode">' + r.code + '</td>';
+    html += '<td>' + r.name + '</td>';
+    if (kind === "3d") {
+      var chip = r.status === "in progress" ? '<span class="status-chip sc-inprogress">in progress</span>' : '<span class="status-chip sc-unknown">chưa có dữ liệu</span>';
+      html += '<td>' + chip + '</td>';
+    } else {
+      var branchHtml = r.branches.map(branchTag).join(" ");
+      if (r.extra) branchHtml += ' <span class="branch-tag bt-check">' + r.extra + '</span>';
+      html += '<td>' + branchHtml + '</td>';
+    }
+    html += '</tr>';
+  });
+  document.getElementById(targetId).innerHTML = html;
+}
+
+renderRows("tbl-3d", data3d, "3d");
+renderRows("tbl-do", dataDo, "do");
+renderRows("tbl-check", dataCheck, "check");
+
+// Filter by area
+document.getElementById("filterbar").addEventListener("click", function(e){
+  var btn = e.target.closest(".chip");
+  if (!btn || btn.classList.contains("print-chip")) return;
+  document.querySelectorAll(".chip[data-area]").forEach(function(c){ c.classList.remove("active"); });
+  btn.classList.add("active");
+  var area = btn.getAttribute("data-area");
+  document.querySelectorAll("tbody tr[data-area]").forEach(function(row){
+    if (area === "all" || row.getAttribute("data-area") === area) {
+      row.classList.remove("row-hidden");
+    } else {
+      row.classList.add("row-hidden");
+    }
+  });
+});
+</script>
+</body>
+</html>
